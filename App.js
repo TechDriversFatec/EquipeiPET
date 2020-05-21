@@ -1,14 +1,9 @@
 import React from 'react';
 import { 
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
+  StyleSheet
 } from 'react-native';
 
 import Routes from './src/Routes'
-
 
 
 export default function App() {
