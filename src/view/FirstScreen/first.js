@@ -9,7 +9,7 @@ import {
 
 import logo from '../../../assets/logo.png'
 
-export default function First() {
+export default function First({navigation}) {
   return (
     <View style={styles.container}>
       <Image source={logo} style={ styles.logo } />
@@ -18,11 +18,13 @@ export default function First() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sodales aliquet. Aenean mollis lacus ac euismod condimentum. Sed vulputate molestie vehicula.
       </Text>
       
-      <TouchableHighlight style={ styles.btnGeneral }>
+      <TouchableHighlight style={ styles.btnGeneral }
+      onPress={() => navigation.push('Login')}>
         <Text style={ styles.btnEntrar }> Entrar </Text>
-      </TouchableHighlight>
+      </TouchableHighlight> 
 
-      <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistrar ]}>
+      <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistrar ]}
+      onPress={() => navigation.push('Registro')}>
         <Text style={{ color: "#FFFFFF" }}> Registre-se </Text>
       </TouchableHighlight>
     </View>
