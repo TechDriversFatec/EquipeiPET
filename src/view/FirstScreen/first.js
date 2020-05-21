@@ -7,13 +7,25 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Routes from './src/Routes'
+import logo from '../../../assets/logo.png'
 
-
-
-export default function App() {
+export default function First() {
   return (
-    <Routes />
+    <View style={styles.container}>
+      <Image source={logo} style={ styles.logo } />
+
+      <Text style={ styles.slogan }>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sodales aliquet. Aenean mollis lacus ac euismod condimentum. Sed vulputate molestie vehicula.
+      </Text>
+      
+      <TouchableHighlight style={ styles.btnGeneral }>
+        <Text style={ styles.btnEntrar }> Entrar </Text>
+      </TouchableHighlight>
+
+      <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistrar ]}>
+        <Text style={{ color: "#FFFFFF" }}> Registre-se </Text>
+      </TouchableHighlight>
+    </View>
   );
 }
 
