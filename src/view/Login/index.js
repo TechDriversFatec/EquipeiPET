@@ -1,27 +1,56 @@
-import React from 'react';
-import {StyleSheet, TouchableHighlight, View, Image, Text} from 'react-native'
+import React, { useState } from 'react';
+import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage} from 'react-native'
 import { TextInput } from 'react-native-paper';
 import logo from '../../../assets/logo.png'
+import api from '../../services/api';
 
 export default function Login({navigation}) {
+
+  const [ email, setEmail ] = useState();
+  const [ password, setPassword ] = useState();
+
+  async function auth() {
+    try {
+      const response = await api.post('auth/login', {
+        email,
+        password
+      })
+
+      const { userId, token } = response.data;
+
+      await AsyncStorage.multiSet([
+        ['@ipet:userId', userId],
+        ['@ipet:token', token]
+      ])
+
+      navigation.push('Home')
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
     return (
         <View style={styles.container}>
             <Image source={logo} style={ styles.logo } />
 
             <TextInput style={styles.email}
             label="E-mail"
-            mode="outlined" >
+            mode="outlined" 
+            onChangeText={(value) => setEmail(value)}
+            >
             </TextInput>
             
 
             <TextInput style={styles.senha}
             label="Senha"
             mode="outlined" 
-            secureTextEntry={true} >
+            secureTextEntry={true} 
+            onChangeText={(value) => setPassword(value)}
+            >
             </TextInput>
 
             <TouchableHighlight style={[ styles.btnGeneral, styles.btnEntrar ]}
-            onPress={() => navigation.push('Home')}>
+            onPress={() => auth()}>
                 <Text style={{ color: "#FFFFFF", fontSize: 18 }}> Entrar </Text>
             </TouchableHighlight>
 
