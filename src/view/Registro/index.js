@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { TextInput } from 'react-native-paper';
-import React from 'react';
 import { 
   StyleSheet,
   Text,
@@ -8,9 +8,40 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import api from '../../services/api'
+
 import logo from '../../../assets/logo.png'
 
 export default function Registro({navigation}) {
+
+    const [ email, setEmail ] = useState();
+    const [ password, setPassword ] = useState();
+    const [ name, setName ] = useState();
+
+    async function register() {
+        try {
+          const response = await api.post('auth/register', {
+            name,
+            email,
+            password
+          })
+
+          const { userId, token } = response.data;
+          console.log(userId, token)
+          
+    
+          await AsyncStorage.multiSet([
+            ['@ipet:userId', userId],
+            ['@ipet:token', token]
+          ])
+    
+          navigation.push('Home')
+    
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
     return (
     <View style={ styles.container } >
 
@@ -20,21 +51,25 @@ export default function Registro({navigation}) {
         label = 'Nome'
         mode = 'outlined'
         style ={ styles.input }
+        onChangeText={(value) => setName(value)}
         />
 
         <TextInput 
         label = 'E-mail'
         mode = 'outlined'
         style ={ styles.input }
+        onChangeText={(value) => setEmail(value)}
         />
 
         <TextInput secureTextEntry={true} 
         label = 'Senha'
         mode = 'outlined'
         style ={ styles.input }
+        onChangeText={(value) => setPassword(value)}
         />
 
-        <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistro ]}>
+        <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistro ]}
+        onPress={() => register()}>
             <Text style={{ color: "#FFFFFF" }}> Registrar </Text>
         </TouchableHighlight>
     
