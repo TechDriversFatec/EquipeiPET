@@ -6,28 +6,9 @@ import api from '../../services/api';
 
 export default function Login({navigation}) {
 
-  const [ email, setEmail ] = useState();
-  const [ password, setPassword ] = useState();
 
   async function auth() {
-    try {
-      const response = await api.post('auth/login', {
-        email,
-        password
-      })
 
-      const { userId, token } = response.data;
-
-      await AsyncStorage.multiSet([
-        ['@ipet:userId', userId],
-        ['@ipet:token', token]
-      ])
-
-      navigation.push('Home')
-
-    } catch (error) {
-      console.log(error)
-    }
   }
     return (
         <View style={styles.container}>
@@ -36,7 +17,7 @@ export default function Login({navigation}) {
             <TextInput style={styles.email}
             label="E-mail"
             mode="outlined" 
-            onChangeText={(value) => setEmail(value)}
+            
             >
             </TextInput>
             
@@ -45,7 +26,7 @@ export default function Login({navigation}) {
             label="Senha"
             mode="outlined" 
             secureTextEntry={true} 
-            onChangeText={(value) => setPassword(value)}
+            
             >
             </TextInput>
 
