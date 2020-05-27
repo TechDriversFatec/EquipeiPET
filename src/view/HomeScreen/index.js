@@ -4,20 +4,24 @@ import {
     Text,
     ScrollView,
     TouchableHighlight,
-    StyleSheet
+    StyleSheet,
+    AsyncStorage
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
 import styled from 'styled-components/native'
 import { Container } from 'native-base'
 
-export default function Home() {
+
+export default function Home({ navigation }) {
 
     const [ pets, setPet ] = useState([])
 
     useEffect(() => {
         async function getPets () {
-            const response = await api.get('/pet')
+            const userId = await AsyncStorage.getItem('@ipet:userId')
+            
+            const response = await api.get(`/pet/${userId}`)
 
             setPet(response.data)
         }
@@ -31,8 +35,9 @@ export default function Home() {
                 <Row>
                     {
                         pets.map(pet => (
-                            <Box>
-                                <Text style={ style.petName }>{ pet.name } </Text>
+                            <Box key={pet._id}>
+                                <Text style={ styles.petName }
+                                onPress={() => navigation.push('Profile', { petId: pet._id })}>{ pet.name } </Text>
                             </Box>  
                         ))
                     }
@@ -40,7 +45,7 @@ export default function Home() {
                 </Row>
                 
             </ScrollView>
-            <AddButton >
+            <AddButton onPress={() => navigation.push('Form')}>
                 <AntDesign name="plus" size={24} color="black" />
             </AddButton>
         </Container>    
@@ -68,7 +73,7 @@ const AddButton = styled.TouchableHighlight`
         justify-content: center;
         width: 70;
         position: absolute;                                       
-        bottom: 20;                                            
+        bottom: 70;                                            
         right: 20;
         height: 70;
         background-color: #FFFFFF;

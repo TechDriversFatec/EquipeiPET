@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
 StyleSheet,
 Text,
@@ -6,53 +6,105 @@ TextInputasNativeTextInput,
 ScrollView,
 View,
 Image,
-TouchableHighlight
+TouchableHighlight, 
+AsyncStorage
 } from 'react-native';
  
 import { TextInput } from 'react-native-paper';
+
+import api from '../../services/api';
  
-export default function First() {
+export default function First({navigation}) {
+
+    const [ user, setUser ] = useState()
+    const [ name, setName ] = useState()
+    const [ type, setType ] = useState()
+    const [ color, setColor ] = useState()
+    const [ age, setAge ] = useState()
+    const [ born, setBorn ] = useState()
+    const [ breed, setBreed ] = useState()
+    const [ castrationDate, setCastrationDate ] = useState()
+
+    useEffect(() => {
+        async function getUser() {
+            const userId = await AsyncStorage.getItem('@ipet:userId')
+            const response = await api.get(`/user/${userId}`)
+
+            setUser(response.data.name)
+        }
+        getUser()
+    }, [])
+
+    async function handlePet () {
+        const userId = await AsyncStorage.getItem('@ipet:userId')
+
+        try {
+            const response = await api.post('/pet/create', {
+                name,
+                type,
+                color,
+                age,
+                born,
+                breed,
+                castrationDate,
+                owner: user,
+                ownerId: userId
+            })
+
+            navigation.push('Home')
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
     <ScrollView>
     <View style={styles.container}>
     
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Nome do Pet"
     mode="outlined"
-    value="This is a short text"
+    onChangeText={(value) => setName(value)}
 
     />
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+    label="Tipo (Cão ou Gato)"
+    mode="outlined"
+    onChangeText={(value) => setType(value)}
+    />
+
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Cor do Pet"
     mode="outlined"
-    value="This is a short text"
+    onChangeText={(value) => setColor(value)}
     />
     
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Idade"
     mode="outlined"
-    value="This is a short text"
+    onChangeText={(value) => setAge(value)}
     />
     
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Data de Nascimento"
     mode="outlined"
-    value="This is a short text"
+    onChangeText={(value) => setBorn(value)}
     />
     
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Raça"
-    mode="outlined"
-    value="This is a short text"
+    mode="outlined" 
+    onChangeText={(value) => setBreed(value)}   
     />
     
-    <TextInput style={{ backgroundColor:'#8D99AE' }}
+    <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
     label="Data de Castração"
     mode="outlined"
-    value="This is a short text"
+    onChangeText={(value) => setCastrationDate(value)}
     />
     
-    <TouchableHighlight style={[ styles.btnCadastrarPet ]}>
+    <TouchableHighlight style={[ styles.btnCadastrarPet ]}
+    onPress={() => handlePet()}>
     <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
     </TouchableHighlight>
 

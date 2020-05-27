@@ -6,6 +6,8 @@ import Home from '../view/HomeScreen';
 import First from '../view/FirstScreen/first';
 import Login from '../view/Login';
 import Registro from '../view/Registro';
+import Form from '../view/Form';
+import Profile from '../view/Profile';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -36,7 +38,21 @@ const Routes = createAppContainer(
             {
                 headerShown: false,
             }
-        }
+        },
+        Form: {
+            screen: Form,
+            navigationOptions: 
+            {
+                headerShown: false,
+            }
+        },
+        Profile: {
+            screen: Profile,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
     })
 );
 
