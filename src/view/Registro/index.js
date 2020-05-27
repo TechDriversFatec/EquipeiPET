@@ -15,31 +15,32 @@ import logo from '../../../assets/logo.png'
 
 export default function Registro({navigation}) {
 
-  const [ name, setName ] = useState()
-  const [ email, setEmail ] = useState()
-  const [ password, setPassword ] = useState()  
+    const [ name, setName ] = useState()
+    const [ email, setEmail ] = useState()
+    const [ password, setPassword ] = useState()
 
     async function register() {
-      try {
-        const response = await api.post('/auth/register', {
-          name,
-          email,
-          password
-        })
+        try {
+            const response = await api.post('/auth/register', {
+                name,
+                email,
+                password
+            })
 
-        const { userId, token } = response.data;
+            const { userId, token } = response.data;
 
-        await AsyncStorage.multiSet([
-          ['@ipet:userId', userId],
-          ['@ipet:token', token],
-        ])
+            await AsyncStorage.multiSet ([
+                ['@ipet:userId', userId],
+                ['@ipet:token', token],
+            ])
 
-        navigation.push('Home')
+            navigation.push('Home')
 
-      } catch (error) {
-        console.log(error)
+        }   catch (error) {
+            console.log(error)
+        }
       }
-    }
+    
 
     return (
     <View style={ styles.container } >
@@ -50,21 +51,24 @@ export default function Registro({navigation}) {
         label = 'Nome'
         mode = 'outlined'
         style ={ styles.input }
-        onChangeText={(value) => setName(value)}
+        onChangeText={(value) => setName(value)} 
+
         />
 
         <TextInput 
         label = 'E-mail'
         mode = 'outlined'
         style ={ styles.input }
-        onChangeText={(value) => setEmail(value)}
+        onChangeText={(value) => setEmail(value)} 
+
         />
 
         <TextInput secureTextEntry={true} 
         label = 'Senha'
         mode = 'outlined'
         style ={ styles.input }
-        onChangeText={(value) => setPassword(value)}
+        onChangeText={(value) => setPassword(value)} 
+
         />
 
         <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistro ]}

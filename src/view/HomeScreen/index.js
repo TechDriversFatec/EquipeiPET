@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
-import styled from 'styled-components/native'
+import styled from 'styled-components/'
 import { Container } from 'native-base'
 
 
