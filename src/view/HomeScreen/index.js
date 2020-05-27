@@ -4,11 +4,12 @@ import {
     Text,
     ScrollView,
     TouchableHighlight,
-    StyleSheet
+    StyleSheet,
+    AsyncStorage
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
-import styled from 'styled-components/native'
+import styled from 'styled-components/'
 import { Container } from 'native-base'
 
 export default function Home() {
@@ -17,7 +18,9 @@ export default function Home() {
 
     useEffect(() => {
         async function getPets () {
-            const response = await api.get('/pet')
+            const userId = await AsyncStorage.getItem('@ipet:userId')
+
+            const response = await api.get('/pet/${userId}')
 
             setPet(response.data)
         }
@@ -32,7 +35,7 @@ export default function Home() {
                     {
                         pets.map(pet => (
                             <Box>
-                                <Text style={ style.petName }>{ pet.name } </Text>
+                                <Text style={ styles.petName }>{ pet.name } </Text>
                             </Box>  
                         ))
                     }
