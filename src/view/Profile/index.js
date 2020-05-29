@@ -25,16 +25,14 @@ export default function Index({ navigation }) {
 
   useEffect(() => {
     async function getPet () {
-        
-        const response = await api.get(`/pet/show/${petId}`)
+      const response = await api.get(`/pet/show/${petId}`)
 
-        setName(response.data.name)
-        setType(response.data.type)
-        setColor(response.data.color)
-        setAge(response.data.age)
-        setBreed(response.data.breed)
-
-        
+      setName(response.data.name)
+      setType(response.data.type)
+      setColor(response.data.color)
+      setAge(response.data.age)
+      setBreed(response.data.breed)
+  
     }
 
     getPet()
@@ -46,13 +44,11 @@ export default function Index({ navigation }) {
       <View style={styles.container2}>
         <View style={styles.container3}>
  
-          
- 
-        <Text>Nome: { name }</Text>
-        <Text>Tipo: { type }</Text>
-        <Text>Cor: { color }</Text>
-        <Text>Idade: { age }</Text>
-        <Text>Raça: { breed }</Text>
+          <Text>Nome: {name}</Text>
+          <Text>Tipo: {type}</Text>
+          <Text>Cor: {color}</Text>
+          <Text>Idade: {age}</Text>
+          <Text>Raça: {breed}</Text>
    
         </View>
       </View>
