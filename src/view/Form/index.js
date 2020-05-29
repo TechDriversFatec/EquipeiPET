@@ -27,43 +27,41 @@ export default function First({navigation}) {
 
     useEffect(() => {
         async function getUser() {
-            const userId = await AsyncStorage.getItem('@ipet:userId')
-            const response = await api.get(`/user/${userId}`)
+            const id = await AsyncStorage.getItem('@ipet:userId')
 
-            setUser(response.data.name)
+ 
+                const response = await api.get(`/user/${id}`)
+                setUser(response.data.name)
+
         }
         getUser()
     }, [])
 
     async function handlePet () {
-        const userId = await AsyncStorage.getItem('@ipet:userId')
-
+        const id = await AsyncStorage.getItem('@ipet:userId')
         try {
-            const response = await api.post('/pet/create', {
+            const response = await api.post('/pet/create',{
                 name,
                 type,
                 color,
-                age,
+                age, 
                 born,
                 breed,
                 castrationDate,
                 owner: user,
-                ownerId: userId
+                ownerId: id     
             })
-
             navigation.push('Home')
         } catch (error) {
-            console.log(error)
+        console.log(error)    
         }
     }
-    return (
-
+return(
     <View style={styles.container}>
         
         <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
         label="Nome do Pet"
         mode="outlined"
-        onChangeText={(value) => setName(value)}
 
         />
 
