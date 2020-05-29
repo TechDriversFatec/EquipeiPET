@@ -62,7 +62,7 @@ return(
         <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
         label="Nome do Pet"
         mode="outlined"
-
+        onChangeText={(value) => setName(value)}
         />
 
         <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
