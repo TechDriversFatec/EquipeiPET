@@ -46,14 +46,14 @@ const Routes = createAppContainer(
             screen: Form,
             navigationOptions: 
             {
-                headerShown: false,
+                headerShown: true,
             }
         },
         Profile: {
             screen: Profile,
             navigationOptions: 
             {
-                headerShown: true,
+                headerShown: true
             }
         },
         Vacinas: {

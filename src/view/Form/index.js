@@ -57,56 +57,56 @@ export default function First({navigation}) {
         }
     }
 return(
-    <View style={styles.container}>
-        
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Nome do Pet"
-        mode="outlined"
-        onChangeText={(value) => setName(value)}
-        />
+    <ScrollView style={styles.container}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Nome do Pet"
+            mode="outlined"
+            onChangeText={(value) => setName(value)}
+            />
 
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Tipo (Cão ou Gato)"
-        mode="outlined"
-        onChangeText={(value) => setType(value)}
-        />
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Tipo (Cão ou Gato)"
+            mode="outlined"
+            onChangeText={(value) => setType(value)}
+            />
 
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Cor do Pet"
-        mode="outlined"
-        onChangeText={(value) => setColor(value)}
-        />
-        
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Idade"
-        mode="outlined"
-        onChangeText={(value) => setAge(value)}
-        />
-        
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Data de Nascimento"
-        mode="outlined"
-        onChangeText={(value) => setBorn(value)}
-        />
-        
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Raça"
-        mode="outlined" 
-        onChangeText={(value) => setBreed(value)}   
-        />
-        
-        <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
-        label="Data de Castração"
-        mode="outlined"
-        onChangeText={(value) => setCastrationDate(value)}
-        />
-        
-        <TouchableHighlight style={[ styles.btnCadastrarPet ]}
-        onPress={() => handlePet()}>
-        <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
-        </TouchableHighlight>
-
-    </View>
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Cor do Pet"
+            mode="outlined"
+            onChangeText={(value) => setColor(value)}
+            />
+            
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Idade"
+            mode="outlined"
+            onChangeText={(value) => setAge(value)}
+            />
+            
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Data de Nascimento"
+            mode="outlined"
+            onChangeText={(value) => setBorn(value)}
+            />
+            
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Raça"
+            mode="outlined" 
+            onChangeText={(value) => setBreed(value)}   
+            />
+            
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Data de Castração"
+            mode="outlined"
+            onChangeText={(value) => setCastrationDate(value)}
+            />
+            
+            <TouchableHighlight style={[ styles.btnCadastrarPet ]}
+            onPress={() => handlePet()}>
+            <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
+            </TouchableHighlight>
+        </View>
+    </ScrollView>
 
     );
     }
@@ -115,8 +115,7 @@ return(
     container: {
         flex: 1,
         backgroundColor: '#8D99AE',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 20
     },
     
     btnCadastrarPet: {

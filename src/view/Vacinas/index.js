@@ -64,7 +64,8 @@ export default function Vaccines({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <AddButton onPress={() => navigation.push('CadVacina')}>
+            
+            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadVacina')}>
                 <AntDesign name="plus" size={24} color="black" />
             </AddButton>
         </Container>    
@@ -94,15 +95,14 @@ const Row = styled.View`
 const AddButton = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
-        width: 70;
-        position: fixed;                                       
-        bottom: 70;                                            
-        right: 20;
-        height: 70;
+        align-self: flex-end;
+        width: 70px;                                      
+        bottom: 70px;                                            
+        right: 20px;
+        height: 70px;
         background-color: #FFFFFF;
-        border-radius: 100;
+        border-radius: 100px;
         box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
-        elevation: 3;
 `;
 
 

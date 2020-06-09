@@ -79,14 +79,13 @@ export default function Index({ navigation }) {
 const SmallBtn = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
-        width: 30;
-        position: fixed;                                                                                  
-        right: 30;
-        height: 30;
+        width: 30px;
+        position: absolute;                                                                                  
+        right: 30px;
+        height: 30px;
         background-color: #8D99AE;
-        border-radius: 100;
+        border-radius: 100px;
         box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
-        elevation: 3;
 `;
  
 const styles = StyleSheet.create({
@@ -102,9 +101,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    width: "95%",
-    maxHeight: "95%",
-    borderRadius: "15px"
+    width: '95%',
+    maxHeight: '95%',
+    borderRadius: 15
   },
  
   container3: {
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
   photo: {
     width: 155,
     height: 155,
-    borderRadius: "30px",
+    borderRadius: 30,
     marginBottom: 40,
     borderWidth: 1,
     borderColor: "#2B2D42",
