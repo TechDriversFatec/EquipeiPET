@@ -6,9 +6,13 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
  
 //import photo from '../../../assets/photo.png'
 
+import styled from 'styled-components/native'
 import api from '../../services/api';
  
 export default function Index({ navigation }) {
@@ -52,9 +56,38 @@ export default function Index({ navigation }) {
    
         </View>
       </View>
+
+      <SmallBtn style={ styles.vaccine }
+        onPress={() => navigation.navigate('')}
+      >
+        <Entypo name="dots-three-horizontal" size={16} color="white" /> 
+      </SmallBtn>
+      <SmallBtn style={ styles.parasiting }
+        onPress={() => navigation.navigate('')}
+      > 
+        <Entypo name="bug" size={16} color="white" />
+      </SmallBtn>
+      <SmallBtn style={ styles.vermifuge }
+        onPress={() => navigation.push('Vacinas', { petId })}
+      > 
+        <Fontisto name="injection-syringe" size={16} color="white" />
+      </SmallBtn>
     </View>
   );
 }
+
+const SmallBtn = styled.TouchableHighlight`
+        align-items: center;
+        justify-content: center;
+        width: 30;
+        position: fixed;                                                                                  
+        right: 30;
+        height: 30;
+        background-color: #8D99AE;
+        border-radius: 100;
+        box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
+        elevation: 3;
+`;
  
 const styles = StyleSheet.create({
   container: {
@@ -94,4 +127,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
  
+  vaccine: {
+    bottom: 50
+  },
+
+  parasiting: {
+    bottom: 90,
+  },
+
+  vermifuge: {
+    bottom: 125
+  }
 });
