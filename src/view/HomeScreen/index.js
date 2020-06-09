@@ -72,7 +72,7 @@ const AddButton = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
         width: 70;
-        position: absolute;                                       
+        position: fixed;                                       
         bottom: 70;                                            
         right: 20;
         height: 70;
