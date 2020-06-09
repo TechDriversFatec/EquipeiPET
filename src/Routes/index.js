@@ -8,6 +8,9 @@ import Login from '../view/Login';
 import Registro from '../view/Registro';
 import Form from '../view/Form';
 import Profile from '../view/Profile';
+import Vacinas from '../view/Vacinas';
+import CadVacina from '../view/CadastroVacina';
+import Parasitario from '../view/CadastroParasitario';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -53,6 +56,22 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
+        Vacinas: {
+            screen: Vacinas,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
+        CadVacina: {
+            screen: CadVacina,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
+
+        
     })
 );
 
