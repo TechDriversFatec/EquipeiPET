@@ -30,7 +30,7 @@ export default function Home({ navigation }) {
 
     }, [])
     return (
-        <Container style={{ margin: 0 }}>
+        <Container style={{ marginTop: 0 }}>
             <ScrollView style={ styles.container }>
                 <Row>
                     {
@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <AddButton onPress={() => navigation.push('Form')}>
+            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('Form')}>
                 <AntDesign name="plus" size={24} color="black" />
             </AddButton>
         </Container>    
@@ -71,22 +71,21 @@ const Row = styled.View`
 const AddButton = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
-        width: 70;
-        position: absolute;                                       
-        bottom: 70;                                            
-        right: 20;
-        height: 70;
+        width: 70px;                                     
+        bottom: 70px;                                            
+        right: 20px;
+        height: 70px;
         background-color: #FFFFFF;
-        border-radius: 100;
+        border-radius: 100px;
         box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
-        elevation: 3;
 `;
 
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#8D99AE",
-        padding: "3%"
+        padding: "3%",
+        marginTop: 30
     },
     petName: { 
         textAlign: 'center', 
