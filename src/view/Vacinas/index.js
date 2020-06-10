@@ -5,7 +5,8 @@ import {
     ScrollView,
     TouchableHighlight,
     StyleSheet,
-    AsyncStorage 
+    AsyncStorage,
+    Image 
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
@@ -27,6 +28,7 @@ export default function Vaccines({ navigation }) {
             const response = await api.get(`/vaccinate/${petId}`)
 
             setVaccine(response.data)
+            console.log(vaccines.length)
         }
 
         getVaccines()
@@ -39,11 +41,20 @@ export default function Vaccines({ navigation }) {
         navigation.goBack()
     }
 
+
+
     return (
         <Container style={{ margin: 0 }}>
             <ScrollView style={ styles.container }>
                 <Row>
+                    
                     {
+                        vaccines.length < 1 ? 
+                        <View style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                            <Fontisto name="injection-syringe" size={52} color="white" />
+                            <Text style={{ color: "#FFFFFF" }}> Não possui vacinas ainda </Text>
+                        </View>
+                        :
                         vaccines.map(vaccine => (
                             <Box key={vaccine._id}>
                                 <View style={{ width: "90%" }}>
@@ -65,7 +76,7 @@ export default function Vaccines({ navigation }) {
                 
             </ScrollView>
             
-            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadVacina')}>
+            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadVacina', { petId })}>
                 <AntDesign name="plus" size={24} color="black" />
             </AddButton>
         </Container>    
