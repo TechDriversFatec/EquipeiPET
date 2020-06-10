@@ -11,6 +11,7 @@ import Profile from '../view/Profile';
 import Vacinas from '../view/Vacinas';
 import CadVacina from '../view/CadastroVacina';
 import Parasitario from '../view/CadastroParasitario';
+import EsqueceuSenha from '../view/EsqueceuSenha'
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -68,6 +69,14 @@ const Routes = createAppContainer(
             navigationOptions: 
             {
                 headerShown: true,
+            }
+        },
+
+        EsqueceuSenha: {
+            screen: EsqueceuSenha,
+            navigationOptions:
+            {
+                headerShown: true
             }
         },
 

@@ -3,7 +3,9 @@ import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage} from 'r
 import { TextInput, BottomNavigation } from 'react-native-paper';
 import logo from '../../../assets/logo.png'
 
+export default function Login({navigation}) {
 
+  return (
 
 <View style={ styles.container} >
     <Image source={logo} style={ styles.logo }> 
@@ -27,14 +29,13 @@ import logo from '../../../assets/logo.png'
     mode = 'outlined'
         />
 
-    <TouchableHighlight style={ btnGeneral } >
-        <Text style ={ styles.text }> Salvar senha </Text>
+    <TouchableHighlight style={[ styles.btnRegistro, styles.btnGeneral ]}>
+        <Text style ={{ color: '#FFF' } }> Salvar senha </Text>
     </TouchableHighlight>
 
-     
-
-
 </View>
+
+)}
 
 
 const styles = StyleSheet.create({ 
@@ -76,7 +77,9 @@ const styles = StyleSheet.create({
       fontSize: 16,
       marginTop: 50
       },
-
     
-
+    btnRegistro: {
+      backgroundColor: "#EF233C",
+      marginTop: 17
+    },
 })
