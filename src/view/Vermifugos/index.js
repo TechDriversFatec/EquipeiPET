@@ -16,7 +16,7 @@ import moment from 'moment'
 
 export default function Vermifuge({ navigation }){
   const {petId} = navigation.state.params;
-  const [vermifuge, setVermifuge] = useState([])
+  const [vermifuges, setVermifuge] = useState([])
 
   useEffect(() => {
     async function getVermifuge () {
@@ -42,13 +42,19 @@ export default function Vermifuge({ navigation }){
       <ScrollView style={ styles.container }>
         <Row>
           {
-            vermifuge.map(vermifuge => (
+            vermifuges.length < 1 ? 
+            <View style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+              <Fontisto name="injection-syringe" size={52} color="white" />
+              <Text style={{ color: "#FFFFFF" }}> Não possui vermifugos ainda </Text>
+            </View>
+            :
+            vermifuges.map(vermifuge => (
               <Box key={vermifuge._id}>
                 <View style={{ width: "90%" }}>
                   <Text style={ styles.vermifugeName }>{ vermifuge.name } </Text>
                   <Text style={ styles.vermifugeDates }>
-                    { moment(vaccine.vermifugeDate).add(10, 'days').calendar() } - 
-                    { moment(vaccine.returningDate).add(10, 'days').calendar() }
+                    { moment(vermifuge.vermifugeDate).add(10, 'days').calendar() } - 
+                    { moment(vermifuge.returningDate).add(10, 'days').calendar() }
                   </Text>
                 </View>
                 <Fontisto name="trash" size={20} color="grey" 
@@ -59,7 +65,7 @@ export default function Vermifuge({ navigation }){
           }        
         </Row>   
       </ScrollView>  
-        <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadVermifugo')}>
+        <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadVermifugo', { petId })}>
             <AntDesign name="plus" size={24} color="black" />
         </AddButton>
     </Container>    
