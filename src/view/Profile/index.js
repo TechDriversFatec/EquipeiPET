@@ -58,7 +58,7 @@ export default function Index({ navigation }) {
       </View>
 
       <SmallBtn style={ styles.vaccine }
-        onPress={() => navigation.navigate('')}
+        onPress={() => navigation.navigate('Vermifugo', {petId})}
       >
         <Entypo name="dots-three-horizontal" size={16} color="white" /> 
       </SmallBtn>
