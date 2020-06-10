@@ -5,12 +5,14 @@ import {
     ScrollView,
     TouchableHighlight,
     StyleSheet,
-    AsyncStorage 
+    AsyncStorage,
+    Image 
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
 import styled from 'styled-components/native'
 import { Container } from 'native-base'
+import logo from '../../../assets/logo.png'
 
 
 export default function Home({ navigation }) {
@@ -35,7 +37,8 @@ export default function Home({ navigation }) {
                 <Row>
                     {
                         pets.map(pet => (
-                            <Box key={pet._id}>
+                            <Box style={{ alignItems: "center" }} key={pet._id}>
+                                <Image source={logo} style={ styles.logo } />
                                 <Text style={ styles.petName }
                                 onPress={() => navigation.push('Profile', { petId: pet._id })}>{ pet.name } </Text>
                             </Box>  
@@ -61,6 +64,8 @@ const Box = styled.View`
     border-radius: 7px;
     margin: 4%;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.24);
+    justify-content: center;
+    
 `;
 
 const Row = styled.View`
@@ -89,5 +94,11 @@ const styles = StyleSheet.create({
     petName: { 
         textAlign: 'center', 
         marginTop: 10 
+    },
+    logo: {
+        width: 70,
+        height: 70,
+        borderRadius: 50,
+        marginBottom: 10
     }
 });
