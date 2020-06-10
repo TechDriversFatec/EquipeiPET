@@ -84,8 +84,7 @@ const AddButton = styled.TouchableHighlight`
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#8D99AE",
-        padding: "3%",
-        marginTop: 30
+        padding: "3%"
     },
     petName: { 
         textAlign: 'center', 
