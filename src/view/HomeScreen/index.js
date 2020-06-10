@@ -11,8 +11,10 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
 import styled from 'styled-components/native'
-import { Container } from 'native-base'
+import { Container, Header, Left, Body, Title } from 'native-base'
 import logo from '../../../assets/logo.png'
+
+
 
 
 export default function Home({ navigation }) {
@@ -33,6 +35,22 @@ export default function Home({ navigation }) {
     }, [])
     return (
         <Container style={{ marginTop: 0 }}>
+        {
+        /** 
+            <Header style={{ backgroundColor: '#8D99AE', height: 50 }}>
+                <Left style={{ marginRight: 73 }}>
+                    <TouchableHighlight onPress={() => navigation.push('First')}>
+                        <AntDesign name="logout" size={20} color="white" />
+                    </TouchableHighlight>
+                    
+                </Left>
+                <Body>
+                    <Text style={{ textAlign: "center", color: "#FFFFFF", fontSize: 16 }}> Home </Text>
+                </Body>
+                
+            </Header>
+        */
+        }
             <ScrollView style={ styles.container }>
                 <Row>
                     {
