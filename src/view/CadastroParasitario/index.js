@@ -8,7 +8,7 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.container2}>
 
-      <Text style={{fontSize:20, marginBottom:15}}>Adicionar uma Vacina:</Text> 
+      <Text style={{fontSize:20, marginBottom:15}}>Adicionar um Parasitário:</Text> 
 
       <TextInput style={styles.Input}
       label="Nome do Parasitário"

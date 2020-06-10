@@ -63,7 +63,7 @@ export default function Index({ navigation }) {
         <Entypo name="dots-three-horizontal" size={16} color="white" /> 
       </SmallBtn>
       <SmallBtn style={ styles.parasiting }
-        onPress={() => navigation.navigate('')}
+        onPress={() => navigation.navigate('Parasitario', {petId})}
       > 
         <Entypo name="bug" size={16} color="white" />
       </SmallBtn>

@@ -10,7 +10,9 @@ import Form from '../view/Form';
 import Profile from '../view/Profile';
 import Vacinas from '../view/Vacinas';
 import CadVacina from '../view/CadastroVacina';
-import Parasitario from '../view/CadastroParasitario';
+import Parasitario from '../view/Parasitario';
+import CadParasitario from '../view/CadastroParasitario';
+import Vermifugo from '../view/Vermifugos'
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -70,8 +72,27 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
-
-        
+        Parasitario: {
+            screen: Parasitario,
+            navigationOptions:
+            {
+                headerShown: true,
+            },
+        },
+        CadParasitario: {
+            screen: CadParasitario,
+            navigationOptions:
+            {
+                headerShown: true,
+            }
+        },
+        Vermifugo: {
+            screen: Vermifugo,
+            navigationOptions:
+            {
+                headerShown: true,
+            }
+        },
     })
 );
 
