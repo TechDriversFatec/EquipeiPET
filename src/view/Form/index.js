@@ -10,6 +10,8 @@ TouchableHighlight,
 Button,
 AsyncStorage
 } from 'react-native';
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 import * as ImagePicker from 'expo-image-picker';
  
 import { TextInput } from 'react-native-paper';
@@ -41,6 +43,37 @@ export default function First({navigation}) {
         getUser()
     }, [])
 
+    async function imagePickerCall() {
+        if (Constants.platform.ios) {
+          const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    
+          if (status !== "granted") {
+            alert("Nós precisamos dessa permissão.");
+            return;
+          }
+        }
+        
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All
+        });
+
+        console.log(result)
+      
+        if (result.cancelled) {
+            return;
+        }
+      
+        if (!result.uri) {
+            return;
+        }
+      
+        setImage(result);
+    }
+    
+
+
+
     async function handlePet () {
         const id = await AsyncStorage.getItem('@ipet:userId')
         try {
@@ -64,17 +97,18 @@ export default function First({navigation}) {
 
     async function sendFile(id) {
         //const filename = file.split('/').pop();
+        const path = file.uri.split('/');
+        const fileName = path[path.length - 1];
 
         const data = new FormData();
-        data.append('file',  file )
+        data.append('file',  { 
+            uri: file.uri,
+            name: fileName,
+            type: file.type
+         } )
 
         try {
-            const response = await api.put(`/pet/upload/${id}`, data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-                
-            })
+            const response = await api.put(`/pet/upload/${id}`, data)
 
             navigation.push('Home')
         } catch (error) {
@@ -83,37 +117,14 @@ export default function First({navigation}) {
         
     }
 
-    const openImagePickerAsync = async () => {
-        const permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
-    
-        if (permissionResult.granted === false) {
-          alert("Permission to access camera roll is required!");
-          return;
-        }
-    
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-      
-        console.log(result);
-      
-        if (!result.cancelled) {
-            setImage(result.uri);
-        }
-    }
-    
-
 
 return(
     <ScrollView style={styles.container}>
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button title="Abrir galeria" onPress={openImagePickerAsync} />
+            <Button title="Abrir galeria" onPress={imagePickerCall} />
             {
-                file && <Image source={{ uri: file }} style={{ width: 130, height: 130, marginTop: 5 }} />
+                file && <Image source={{ uri: file.uri }} style={{ width: 130, height: 130, marginTop: 5 }} />
             }
         </View>
 
@@ -187,7 +198,7 @@ return(
     borderColor:"#2B2D42",
     borderRadius:7,
     marginTop:10,
-    marginBottom: 10
+    marginBottom: 30
     }
     }
  
