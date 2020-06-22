@@ -7,8 +7,10 @@ ScrollView,
 View,
 Image,
 TouchableHighlight, 
+Button,
 AsyncStorage
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
  
 import { TextInput } from 'react-native-paper';
 
@@ -24,6 +26,8 @@ export default function First({navigation}) {
     const [ born, setBorn ] = useState()
     const [ breed, setBreed ] = useState()
     const [ castrationDate, setCastrationDate ] = useState()
+
+    const [ file, setImage ] = useState()
 
     useEffect(() => {
         async function getUser() {
@@ -51,13 +55,68 @@ export default function First({navigation}) {
                 owner: user,
                 ownerId: id     
             })
-            navigation.push('Home')
+            if(!file) navigation.push('Home')
+            else sendFile(response.data._id)
         } catch (error) {
         console.log(error)    
         }
     }
+
+    async function sendFile(id) {
+        //const filename = file.split('/').pop();
+
+        const data = new FormData();
+        data.append('file',  file )
+
+        try {
+            const response = await api.put(`/pet/upload/${id}`, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+                
+            })
+
+            navigation.push('Home')
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
+    const openImagePickerAsync = async () => {
+        const permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+    
+        if (permissionResult.granted === false) {
+          alert("Permission to access camera roll is required!");
+          return;
+        }
+    
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+      
+        console.log(result);
+      
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    }
+    
+
+
 return(
     <ScrollView style={styles.container}>
+
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button title="Abrir galeria" onPress={openImagePickerAsync} />
+            {
+                file && <Image source={{ uri: file }} style={{ width: 130, height: 130, marginTop: 5 }} />
+            }
+        </View>
+
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Nome do Pet"
@@ -127,7 +186,8 @@ return(
     borderWidth:1,
     borderColor:"#2B2D42",
     borderRadius:7,
-    marginTop:10
+    marginTop:10,
+    marginBottom: 10
     }
     }
  
