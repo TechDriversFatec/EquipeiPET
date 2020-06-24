@@ -24,13 +24,13 @@ export default function Home({ navigation }) {
                 <Row>
                     
                             <Box style={{ alignItems: "center" }} 
-                            onPress={() => navigation.push('Form', { animal: 'Cão' })}
+                            onPress={() => navigation.push('Form', { animal: 'Gato' })}
                             >
                                 <Image source={cat} style={ styles.logo } />
                             </Box>
 
                             <Box style={{ alignItems : 'center' }} 
-                            onPress={() => navigation.push('Form', { animal: 'Gato' })}
+                            onPress={() => navigation.push('Form', { animal: 'Cão' })}
                             >
                                 <Image source={dog} style={ styles.logo } />
                             </Box>

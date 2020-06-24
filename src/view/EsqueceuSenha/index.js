@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
 
   input: {
     marginTop: 50,
-    textAlignVertical: 'center',
     color: '#FFFFFF',
     fontSize: 16,
     height: 47,
