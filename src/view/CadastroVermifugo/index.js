@@ -1,31 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight} from 'react-native';
-
+import api from '../../services/api';
 import { TextInput } from 'react-native-paper';
 
-export default function App() {
+export default function App({ navigation }) {
+
+
+  const { petId } = navigation.state.params;
+  const [ petName, setPetName ] = useState()
+  const [ name, setName ] = useState()
+  const [ vermifugationDate, setVermifugationDate ] = useState()
+  const [ returningDate, setReturningDate ] = useState()
+
+  useEffect(() => {
+    async function loadInfos () {
+      console.log(petId)
+      const response = await api.get(`/pet/show/${petId}`)
+
+      setPetName(response.data.name)
+    }
+    loadInfos()
+  }, [])
+  
+
+  async function handleVermifuge() {
+
+    try {
+      const response = await api.post('/vermifuge/create', {
+        name,
+        petId,
+        petName,
+        vermifugationDate,
+        returningDate
+      })
+
+      console.log(response.data)
+      navigation.push('Home', { petId })
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
 
-      <Text style={{fontSize:20, marginBottom:15}}>Adicionar uma Vacina:</Text> 
+      <Text style={{fontSize:20, marginBottom:15}}>Adicionar um Vermifugo:</Text> 
 
       <TextInput style={styles.Input}
       label="Nome do Vermífugo"
       mode="outlined"
+      onChangeText={(value) => setName(value)}
       ></TextInput>
 
       <TextInput style={styles.Input}
       label="Data do Vermífugo"
       mode="outlined"
+      onChangeText={(value) => setVermifugationDate(value)}
       ></TextInput>
 
       <TextInput style={styles.Input}
-      label="Data para Vermifugar"
+      label="Data para revermifugar"
       mode="outlined"
+      onChangeText={(value) => setReturningDate(value)}
       ></TextInput>
 
-      <TouchableHighlight style={[styles.btnGeneral]}>
+      <TouchableHighlight style={[styles.btnGeneral]}
+      onPress={() => handleVermifuge()}>
         <Text style={{color: "#FFFFFF", fontSize:17}}> Salvar Dados </Text>
       </TouchableHighlight>
 
@@ -72,8 +116,6 @@ const styles = StyleSheet.create({
    marginTop: 10,
    backgroundColor: "#ffffff",
    borderRadius: 7,
-   justifyContent: "flex-start",
-   alignItems: "flex-start",
    marginBottom: 10
   },
 

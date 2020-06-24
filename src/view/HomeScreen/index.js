@@ -5,12 +5,16 @@ import {
     ScrollView,
     TouchableHighlight,
     StyleSheet,
-    AsyncStorage 
+    AsyncStorage,
+    Image 
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
 import styled from 'styled-components/native'
-import { Container } from 'native-base'
+import { Container, Header, Left, Body, Title } from 'native-base'
+import logo from '../../../assets/logo.png'
+
+
 
 
 export default function Home({ navigation }) {
@@ -31,11 +35,28 @@ export default function Home({ navigation }) {
     }, [])
     return (
         <Container style={{ marginTop: 0 }}>
+        {
+        /** 
+            <Header style={{ backgroundColor: '#8D99AE', height: 50 }}>
+                <Left style={{ marginRight: 73 }}>
+                    <TouchableHighlight onPress={() => navigation.push('First')}>
+                        <AntDesign name="logout" size={20} color="white" />
+                    </TouchableHighlight>
+                    
+                </Left>
+                <Body>
+                    <Text style={{ textAlign: "center", color: "#FFFFFF", fontSize: 16 }}> Home </Text>
+                </Body>
+                
+            </Header>
+        */
+        }
             <ScrollView style={ styles.container }>
                 <Row>
                     {
                         pets.map(pet => (
-                            <Box key={pet._id}>
+                            <Box style={{ alignItems: "center" }} key={pet._id}>
+                                <Image source={logo} style={ styles.logo } />
                                 <Text style={ styles.petName }
                                 onPress={() => navigation.push('Profile', { petId: pet._id })}>{ pet.name } </Text>
                             </Box>  
@@ -61,6 +82,8 @@ const Box = styled.View`
     border-radius: 7px;
     margin: 4%;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.24);
+    justify-content: center;
+    
 `;
 
 const Row = styled.View`
@@ -84,11 +107,16 @@ const AddButton = styled.TouchableHighlight`
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#8D99AE",
-        padding: "3%",
-        marginTop: 30
+        padding: "3%"
     },
     petName: { 
         textAlign: 'center', 
         marginTop: 10 
+    },
+    logo: {
+        width: 70,
+        height: 70,
+        borderRadius: 50,
+        marginBottom: 10
     }
 });
