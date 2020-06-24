@@ -56,7 +56,7 @@ export default function Index({ navigation }) {
    
         </View>
       </View>
-
+      
       <SmallBtn style={ styles.vaccine }
         onPress={() => navigation.navigate('Vermifugo', {petId})}
       >
@@ -71,6 +71,12 @@ export default function Index({ navigation }) {
         onPress={() => navigation.push('Vacinas', { petId })}
       > 
         <Fontisto name="injection-syringe" size={16} color="white" />
+      </SmallBtn>
+
+      <SmallBtn style={ styles.pen }
+        onPress={() => navigation.navigate('UpdateDog', {petId})}
+      >
+        <Entypo name="edit" size={16} color="white" /> 
       </SmallBtn>
     </View>
   );
@@ -136,6 +142,10 @@ const styles = StyleSheet.create({
 
   vermifuge: {
     bottom: 125
+  },
+
+  pen: {
+    top: 40
   },
 
   logo: {
