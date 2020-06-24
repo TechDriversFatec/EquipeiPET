@@ -15,8 +15,8 @@ export default function First({navigation}) {
       <Image source={logo} style={ styles.logo } />
 
       <Text style={ styles.slogan }>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sodales aliquet. Aenean mollis lacus ac euismod condimentum. Sed vulputate molestie vehicula.
-      </Text>
+        O iPet é a melhor opção de gerenciamento de seus pets no mercado. Possui interface intuitiva e moderna e com ele você pode guardar todos os dados e informações importantes do seu pet, incluindo histórico de doenças, controle de vacinas, remédios parasitários e vermífugos.
+          </Text>
       
       <TouchableHighlight style={ styles.btnGeneral }
       onPress={() => navigation.push('Login')}>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 16,
     marginTop: 50,
-    marginBottom: 170
+    marginBottom: 120
   },
 
   btnGeneral: {
