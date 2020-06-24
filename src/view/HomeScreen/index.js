@@ -33,13 +33,28 @@ export default function Home({ navigation }) {
         getPets()
 
     }, [])
+
+    async function logout () {
+        await AsyncStorage.removeItem('@ipet:token')
+        navigation.navigate("First");
+    }
+
+    useEffect(() => {
+        async function checkToken () {
+            if(!await AsyncStorage.getItem('@ipet:token')) {
+                navigation.push('First')
+            }
+        } 
+        checkToken()
+    }, [])
+
     return (
         <Container style={{ marginTop: 0 }}>
         {
-        /** 
+        
             <Header style={{ backgroundColor: '#8D99AE', height: 50 }}>
                 <Left style={{ marginRight: 73 }}>
-                    <TouchableHighlight onPress={() => navigation.push('First')}>
+                    <TouchableHighlight onPress={() => logout()}>
                         <AntDesign name="logout" size={20} color="white" />
                     </TouchableHighlight>
                     
@@ -49,7 +64,7 @@ export default function Home({ navigation }) {
                 </Body>
                 
             </Header>
-        */
+        
         }
             <ScrollView style={ styles.container }>
                 <Row>
@@ -66,8 +81,8 @@ export default function Home({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('Form')}>
-                <AntDesign name="plus" size={24} color="black" />
+            <AddButton style={{ position: "fixed" }} onPress={() => navigation.push('PickAnimal')}>
+                <AntDesign name="plus" size={24} color="white" />
             </AddButton>
         </Container>    
 
@@ -77,7 +92,7 @@ export default function Home({ navigation }) {
 
 const Box = styled.View`
     background-color: #FFFFFF;
-    width: 42%;
+    width: 90%;
     height: 170px;
     border-radius: 7px;
     margin: 4%;
@@ -87,8 +102,9 @@ const Box = styled.View`
 `;
 
 const Row = styled.View`
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5%;
 `;
 
 const AddButton = styled.TouchableHighlight`
@@ -98,7 +114,7 @@ const AddButton = styled.TouchableHighlight`
         bottom: 70px;                                            
         right: 20px;
         height: 70px;
-        background-color: #FFFFFF;
+        background-color: #2B2D42;
         border-radius: 100px;
         box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
 `;
