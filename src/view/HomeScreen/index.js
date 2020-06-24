@@ -6,7 +6,7 @@ import {
     TouchableHighlight,
     StyleSheet,
     AsyncStorage,
-    Image 
+    Image
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
@@ -47,6 +47,7 @@ export default function Home({ navigation }) {
         } 
         checkToken()
     }, [])
+    
 
     return (
         <Container style={{ marginTop: 0 }}>
@@ -81,9 +82,11 @@ export default function Home({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <AddButton style={{ position: "fixed" }} onPress={() => navigation.push('PickAnimal')}>
-                <AntDesign name="plus" size={24} color="white" />
-            </AddButton>
+            <View style={{borderWidth:0, position:'absolute', bottom:'10px', right:'10px', alignSelf:'flex-end'}}>
+                <AddButton style={{  }} onPress={() => navigation.push('PickAnimal')}>
+                    <AntDesign name="plus" size={24} color="white" />
+                </AddButton>
+            </View>
         </Container>    
 
     )
@@ -111,8 +114,7 @@ const AddButton = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
         width: 70px;                                     
-        bottom: 70px;                                            
-        right: 20px;
+        
         height: 70px;
         background-color: #2B2D42;
         border-radius: 100px;
