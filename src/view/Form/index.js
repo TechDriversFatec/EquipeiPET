@@ -20,6 +20,8 @@ import api from '../../services/api';
  
 export default function First({navigation}) {
 
+    const { animal } = navigation.state.params
+
     const [ user, setUser ] = useState()
     const [ name, setName ] = useState()
     const [ type, setType ] = useState()
@@ -79,7 +81,7 @@ export default function First({navigation}) {
         try {
             const response = await api.post('/pet/create',{
                 name,
-                type,
+                type: animal,
                 color,
                 age, 
                 born,
@@ -138,7 +140,7 @@ return(
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Tipo (Cão ou Gato)"
             mode="outlined"
-            onChangeText={(value) => setType(value)}
+            value={animal}
             />
 
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
