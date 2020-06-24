@@ -7,8 +7,12 @@ ScrollView,
 View,
 Image,
 TouchableHighlight, 
+Button,
 AsyncStorage
 } from 'react-native';
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
+import * as ImagePicker from 'expo-image-picker';
  
 import { TextInput } from 'react-native-paper';
 
@@ -25,6 +29,8 @@ export default function First({navigation}) {
     const [ breed, setBreed ] = useState()
     const [ castrationDate, setCastrationDate ] = useState()
 
+    const [ file, setImage ] = useState()
+
     useEffect(() => {
         async function getUser() {
             const id = await AsyncStorage.getItem('@ipet:userId')
@@ -36,6 +42,37 @@ export default function First({navigation}) {
         }
         getUser()
     }, [])
+
+    async function imagePickerCall() {
+        if (Constants.platform.ios) {
+          const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    
+          if (status !== "granted") {
+            alert("Nós precisamos dessa permissão.");
+            return;
+          }
+        }
+        
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All
+        });
+
+        console.log(result)
+      
+        if (result.cancelled) {
+            return;
+        }
+      
+        if (!result.uri) {
+            return;
+        }
+      
+        setImage(result);
+    }
+    
+
+
 
     async function handlePet () {
         const id = await AsyncStorage.getItem('@ipet:userId')
@@ -51,13 +88,46 @@ export default function First({navigation}) {
                 owner: user,
                 ownerId: id     
             })
-            navigation.push('Home')
+            if(!file) navigation.push('Home')
+            else sendFile(response.data._id)
         } catch (error) {
         console.log(error)    
         }
     }
+
+    async function sendFile(id) {
+        //const filename = file.split('/').pop();
+        const path = file.uri.split('/');
+        const fileName = path[path.length - 1];
+
+        const data = new FormData();
+        data.append('file',  { 
+            uri: file.uri,
+            name: fileName,
+            type: file.type
+         } )
+
+        try {
+            const response = await api.put(`/pet/upload/${id}`, data)
+
+            navigation.push('Home')
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
+
 return(
     <ScrollView style={styles.container}>
+
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button title="Abrir galeria" onPress={imagePickerCall} />
+            {
+                file && <Image source={{ uri: file.uri }} style={{ width: 130, height: 130, marginTop: 5 }} />
+            }
+        </View>
+
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Nome do Pet"
@@ -127,7 +197,8 @@ return(
     borderWidth:1,
     borderColor:"#2B2D42",
     borderRadius:7,
-    marginTop:10
+    marginTop:10,
+    marginBottom: 30
     }
     }
  

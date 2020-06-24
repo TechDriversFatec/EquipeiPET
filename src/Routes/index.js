@@ -13,6 +13,7 @@ import CadVacina from '../view/CadastroVacina';
 import Parasitario from '../view/Parasitario';
 import CadParasitario from '../view/CadastroParasitario';
 import Vermifugo from '../view/Vermifugos'
+import CadVermifugo from '../view/CadastroVermifugo';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -93,6 +94,13 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
+        CadVermifugo: {
+            screen: CadVermifugo,
+            navigationOptions:
+            {
+                headerShown: true,
+            }
+        }
     })
 );
 

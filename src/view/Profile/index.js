@@ -9,7 +9,7 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
- 
+import logo from '../../../assets/logo.png'
 //import photo from '../../../assets/photo.png'
 
 import styled from 'styled-components/native'
@@ -47,7 +47,7 @@ export default function Index({ navigation }) {
     <View style={styles.container}>
       <View style={styles.container2}>
         <View style={styles.container3}>
- 
+          <Image source={logo} style={ styles.logo } />
           <Text>Nome: {name}</Text>
           <Text>Tipo: {type}</Text>
           <Text>Cor: {color}</Text>
@@ -136,5 +136,12 @@ const styles = StyleSheet.create({
 
   vermifuge: {
     bottom: 125
-  }
+  },
+
+  logo: {
+    width: 155,
+    height: 155,
+    borderRadius: 100,
+    marginBottom: 70
+}
 });

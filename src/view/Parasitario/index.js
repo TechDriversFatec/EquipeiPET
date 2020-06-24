@@ -16,7 +16,7 @@ import moment from 'moment'
 
 export default function Parasiting({ navigation }){
   const {petId} = navigation.state.params;
-  const [parasiting, setParasiting] = useState([])
+  const [parasitings, setParasiting] = useState([])
 
   useEffect(() => {
     async function getParasiting () {
@@ -42,13 +42,19 @@ export default function Parasiting({ navigation }){
       <ScrollView style={ styles.container }>
         <Row>
           {
-            parasiting.map(parasiting => (
+            parasitings.length < 1 ? 
+            <View style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+              <Fontisto name="injection-syringe" size={52} color="white" />
+              <Text style={{ color: "#FFFFFF" }}> Não possui parasitário cadastrado </Text>
+            </View>
+            :
+            parasitings.map(parasiting => (
               <Box key={parasiting._id}>
                 <View style={{ width: "90%" }}>
                   <Text style={ styles.parasitingName }>{ parasiting.name } </Text>
                   <Text style={ styles.parasitingDates }>
-                    { moment(vaccine.parasitingDate).add(10, 'days').calendar() } - 
-                    { moment(vaccine.returningDate).add(10, 'days').calendar() }
+                    { moment(parasiting.parasitingDate).add(10, 'days').calendar() } - 
+                    { moment(parasiting.returningDate).add(10, 'days').calendar() }
                   </Text>
                 </View>
                 <Fontisto name="trash" size={20} color="grey" 
@@ -59,7 +65,7 @@ export default function Parasiting({ navigation }){
           }        
         </Row>   
       </ScrollView>  
-        <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadParasitario')}>
+        <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('CadParasitario', { petId })}>
             <AntDesign name="plus" size={24} color="black" />
         </AddButton>
     </Container>    
