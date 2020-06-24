@@ -60,7 +60,7 @@ export default function Login({navigation}) {
             </Text>
 
             <Text style={ styles.textlink }
-            onPress={() => navigation.push('EsqueceuSenha')}>
+            onPress={() => navigation.push('Forgot')}>
              Esqueceu sua senha?
             </Text>
 
