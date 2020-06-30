@@ -15,6 +15,7 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from 'expo-image-picker';
  
 import { TextInput } from 'react-native-paper';
+import { CheckBox } from 'react-native-elements'
 
 import api from '../../services/api';
  
@@ -32,6 +33,8 @@ export default function First({navigation}) {
     const [ castrationDate, setCastrationDate ] = useState()
 
     const [ file, setImage ] = useState()
+    const [ teste, setTeste ] = useState(false)
+    
 
     useEffect(() => {
         async function getUser() {
@@ -73,6 +76,28 @@ export default function First({navigation}) {
         setImage(result);
     }
     
+
+    const optionsDog = [
+        {
+            'id': 1,
+            'doenca': 'Cão'
+        },
+        {
+            'id': 2,
+            'doenca': 'Cão'
+        }
+    ]
+
+    const optionsCat = [
+        {
+            'id': 1,
+            'doenca': 'Gato'
+        },
+        {
+            'id': 2,
+            'doenca': 'Gato'
+        }
+    ]
 
 
 
@@ -172,6 +197,28 @@ return(
             mode="outlined"
             onChangeText={(value) => setCastrationDate(value)}
             />
+            {
+                animal == 'Cão' ?
+                optionsDog.map(option => (
+                    <CheckBox
+                    key={option.id}
+                    title={option.doenca}
+                    />
+                ))
+
+                :
+                animal == 'Gato' ?
+                optionsCat.map(option => (
+                    <CheckBox
+                    key={option.id}
+                    title={option.doenca}
+                    />
+                ))
+
+                : null
+                
+            }
+
             
             <TouchableHighlight style={[ styles.btnCadastrarPet ]}
             onPress={() => handlePet()}>

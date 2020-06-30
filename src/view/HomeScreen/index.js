@@ -82,7 +82,7 @@ export default function Home({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <View style={{borderWidth:0, position:'absolute', bottom:'10px', right:'10px', alignSelf:'flex-end'}}>
+            <View style={{borderWidth:0, position:'absolute', bottom:10, right:10, alignSelf:'flex-end'}}>
                 <AddButton style={{  }} onPress={() => navigation.push('PickAnimal')}>
                     <AntDesign name="plus" size={24} color="white" />
                 </AddButton>
@@ -95,19 +95,20 @@ export default function Home({ navigation }) {
 
 const Box = styled.View`
     background-color: #FFFFFF;
-    width: 90%;
+    width: 45%;
     height: 170px;
     border-radius: 7px;
-    margin: 4%;
+    margin: 2%;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.24);
     justify-content: center;
     
 `;
 
 const Row = styled.View`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 50%;
+    padding: 4%;
 `;
 
 const AddButton = styled.TouchableHighlight`
