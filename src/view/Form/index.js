@@ -18,6 +18,7 @@ import { TextInput } from 'react-native-paper';
 import { CheckBox } from 'react-native-elements'
 
 import api from '../../services/api';
+import { Left } from 'native-base';
  
 export default function First({navigation}) {
 
@@ -80,22 +81,162 @@ export default function First({navigation}) {
     const optionsDog = [
         {
             'id': 1,
-            'doenca': 'Cão'
+            'doenca': 'Raiva Canina'
         },
         {
             'id': 2,
-            'doenca': 'Cão'
+            'doenca': 'Cinomose'
+        },
+        {
+            'id': 3,
+            'doenca': 'Doença Periodental'
+        },
+        {
+            'id': 4,
+            'doenca': 'Parvovirose'
+        },
+        {
+            'id': 5,
+            'doenca': 'Câncer'
+        },
+        {
+            'id': 6,
+            'doenca': 'Leptospirose'
+        },
+        {
+            'id': 7,
+            'doenca': 'Hepatite Infecciosa Canina'
+        },
+        {
+            'id': 8,
+            'doenca': 'Sarna'
+        },
+        {
+            'id': 9,
+            'doenca': 'Taxoplasmose'
+        },
+        {
+            'id': 10,
+            'doenca': 'Coronavírus'
+        },
+        {
+            'id': 11,
+            'doenca': 'Hepatite'
+        },
+        {
+            'id': 12,
+            'doenca': 'Parvovírus'
+        },
+        {
+            'id': 13,
+            'doenca': 'Displasia de Quadril'
+        },
+        {
+            'id': 14,
+            'doenca': 'Reumatismo'
+        },
+        {
+            'id': 15,
+            'doenca': 'Epilepsia'
+        },
+        {
+            'id': 16,
+            'doenca': 'Periodontite'
+        },
+        {
+            'id': 17,
+            'doenca': 'Piometra'
+        },
+        {
+            'id': 18,
+            'doenca': 'Torção Gástrica'
+        },
+        {
+            'id': 19,
+            'doenca': 'Alergias Cutâneas'
+        },
+        {
+            'id': 20,
+            'doenca': 'Diabetes'
+        },
+        {
+            'id': 21,
+            'doenca': 'Criptorquidia'
+        },
+        {
+            'id': 22,
+            'doenca': 'Otite'
         }
     ]
 
     const optionsCat = [
         {
             'id': 1,
-            'doenca': 'Gato'
+            'doenca': 'Clamidiose'
         },
         {
             'id': 2,
-            'doenca': 'Gato'
+            'doenca': 'Raiva Felina'
+        },
+        {
+            'id': 3,
+            'doenca': 'Insuficiência Renal Crônica'
+        },
+        {
+            'id': 4,
+            'doenca': 'Peritonite Infecciosa Felina'
+        },
+        {
+            'id': 5,
+            'doenca': 'Vírus da Imunodeficiência Felina'
+        },
+        {
+            'id': 6,
+            'doenca': 'Rinotraqueíte Viral - Gripe de gato'
+        },
+        {
+            'id': 7,
+            'doenca': 'Leucemia Felina'
+        },
+        {
+            'id': 8,
+            'doenca': 'Panleucopenia Felina'
+        },
+        {
+            'id': 9,
+            'doenca': 'Rinotraqueite Felina'
+        },
+        {
+            'id': 10,
+            'doenca': 'Calicivirose'
+        },
+        {
+            'id': 11,
+            'doenca': 'Pneumonite'
+        },
+        {
+            'id': 12,
+            'doenca': 'Alergia'
+        },
+        {
+            'id': 13,
+            'doenca': 'Conjutivite'
+        },
+        {
+            'id': 14,
+            'doenca': 'Doença Periodenta'
+        },
+        {
+            'id': 15,
+            'doenca': 'Otite'
+        },
+        {
+            'id': 16,
+            'doenca': 'Obesidade e Peso Excessivo'
+        },
+        {
+            'id': 17,
+            'doenca': 'Gripe Felina'
         }
     ]
 
@@ -197,12 +338,27 @@ return(
             mode="outlined"
             onChangeText={(value) => setCastrationDate(value)}
             />
+
+            
+            <Text style={{fontSize:'16px', marginTop:'10px'}}>Patologias:</Text>
+                
+            <TouchableHighlight style={[styles.button2]}>
+                <Text style={{color:"#FFF"}}>?</Text>
+            </TouchableHighlight>
+        
+        
+            <View style={[styles.container2]}>
             {
                 animal == 'Cão' ?
                 optionsDog.map(option => (
-                    <CheckBox
+                    <CheckBox 
                     key={option.id}
                     title={option.doenca}
+                    checkedColor={"#8D99AE"}
+                    uncheckedColor={"#8D99AE"}
+                    backgroundColor={"#8D99AE"}
+                    color={"#8D99AE"}
+                    iconColor={"#8D99AE"}
                     />
                 ))
 
@@ -212,14 +368,17 @@ return(
                     <CheckBox
                     key={option.id}
                     title={option.doenca}
+                    checkedColor={"#8D99AE"}
+                    uncheckedColor={"#8D99AE"}
+                    backgroundColor={"#8D99AE"}
                     />
                 ))
 
                 : null
                 
             }
-
-            
+            </View>
+        
             <TouchableHighlight style={[ styles.btnCadastrarPet ]}
             onPress={() => handlePet()}>
             <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
@@ -238,16 +397,31 @@ return(
     },
     
     btnCadastrarPet: {
-    width:"90%",
-    height:47,
-    backgroundColor:"#EF233C",
-    justifyContent:"center",
-    alignItems:"center",
-    borderWidth:1,
-    borderColor:"#2B2D42",
-    borderRadius:7,
-    marginTop:10,
-    marginBottom: 30
+        width:"90%",
+        height:47,
+        backgroundColor:"#EF233C",
+        justifyContent:"center",
+        alignItems:"center",
+        borderWidth:1,
+        borderColor:"#2B2D42",
+        borderRadius:7,
+        marginTop:20,
+        marginBottom: 30
+    },
+
+    container2: {
+        flex: 1,
+        backgroundColor: '#FFF',
+        width:"70%",
+        marginTop:"10px",
+        borderRadius:"5px"
+    },
+
+    button2: {
+        backgroundColor: "#2B2D42",
+        width:"20px",
+        borderRadius:"50%",
+        textAlign:"center"
     }
     }
  
