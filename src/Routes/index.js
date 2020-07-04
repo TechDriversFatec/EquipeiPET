@@ -14,9 +14,12 @@ import Parasitario from '../view/Parasitario';
 import CadParasitario from '../view/CadastroParasitario';
 import Vermifugo from '../view/Vermifugos'
 import CadVermifugo from '../view/CadastroVermifugo';
-import EsqueceuSenha from '../view/EsqueceuSenha';
-import ResetarSenha from '../view/ResetarSenha';
-import TrocarSenha from '../view/TrocarSenha'
+import PickAnimal from '../view/EscolhaAnimalCadastro';
+import Forgot from '../view/EsqueceuSenha';
+import Reset from '../view/ResetarSenha';
+import Change from '../view/TrocarSenha';
+import UpdateDog from '../view/EditarPetDog';
+import UpdateCat from '../view/EditarPetCat';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -52,6 +55,7 @@ const Routes = createAppContainer(
             screen: Form,
             navigationOptions: 
             {
+                headerTitle: 'Cadastre seu Pet',
                 headerShown: true,
             }
         },
@@ -59,6 +63,7 @@ const Routes = createAppContainer(
             screen: Profile,
             navigationOptions: 
             {
+                headerTitle: 'Perfil do Pet',
                 headerShown: true
             }
         },
@@ -73,6 +78,7 @@ const Routes = createAppContainer(
             screen: CadVacina,
             navigationOptions: 
             {
+                headerTitle: 'Cadastro de vacina',
                 headerShown: true,
             }
         },
@@ -87,6 +93,7 @@ const Routes = createAppContainer(
             screen: CadParasitario,
             navigationOptions:
             {
+                headerTitle: 'Cadastro de parasitário',
                 headerShown: true,
             }
         },
@@ -97,34 +104,54 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
-        CadVermifugo: {
-            screen: CadVermifugo,
+        PickAnimal: {
+            screen: PickAnimal,
             navigationOptions:
             {
+                headerTitle: 'Escolha o tipo',
                 headerShown: true,
             }
         },
-        EsqueceuSenha: {
-            screen: EsqueceuSenha,
-            navigationOptions: 
+        Forgot: {
+            screen: Forgot,
+            navigationOptions:
             {
+                headerTitle: 'Esqueceu sua senha?',
                 headerShown: true,
             }
         },
-        ResetarSenha: {
-            screen: ResetarSenha,
-            navigationOptions: 
+        Reset: {
+            screen: Reset,
+            navigationOptions:
             {
+                headerTitle: 'Cadastre uma nova senha',
                 headerShown: true,
             }
         },
-        TrocarSenha: {
-            screen: TrocarSenha,
-            navigationOptions: 
+        Change: {
+            screen: Change,
+            navigationOptions:
             {
+                headerShown: false,
+            }
+        },
+        UpdateDog: {
+            screen: UpdateDog,
+            navigationOptions:
+            {
+                headerTitle: 'Atualizar informações',
                 headerShown: true,
             }
         },
+        UpdateCat: {
+            screen: UpdateCat,
+            navigationOptions:
+            {
+                headerTitle: 'Atualizar informações',
+                headerShown: true,
+            }
+        },
+
     })
 );
 

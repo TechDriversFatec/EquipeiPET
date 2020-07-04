@@ -6,7 +6,7 @@ import {
     TouchableHighlight,
     StyleSheet,
     AsyncStorage,
-    Image 
+    Image
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import api from '../../services/api';
@@ -33,13 +33,29 @@ export default function Home({ navigation }) {
         getPets()
 
     }, [])
+
+    async function logout () {
+        await AsyncStorage.removeItem('@ipet:token')
+        navigation.navigate("First");
+    }
+
+    useEffect(() => {
+        async function checkToken () {
+            if(!await AsyncStorage.getItem('@ipet:token')) {
+                navigation.push('First')
+            }
+        } 
+        checkToken()
+    }, [])
+    
+
     return (
         <Container style={{ marginTop: 0 }}>
         {
-        /** 
+        
             <Header style={{ backgroundColor: '#8D99AE', height: 50 }}>
                 <Left style={{ marginRight: 73 }}>
-                    <TouchableHighlight onPress={() => navigation.push('First')}>
+                    <TouchableHighlight onPress={() => logout()}>
                         <AntDesign name="logout" size={20} color="white" />
                     </TouchableHighlight>
                     
@@ -49,7 +65,7 @@ export default function Home({ navigation }) {
                 </Body>
                 
             </Header>
-        */
+        
         }
             <ScrollView style={ styles.container }>
                 <Row>
@@ -66,9 +82,11 @@ export default function Home({ navigation }) {
                 </Row>
                 
             </ScrollView>
-            <AddButton style={{ position: "absolute" }} onPress={() => navigation.push('Form')}>
-                <AntDesign name="plus" size={24} color="black" />
-            </AddButton>
+            <View style={{borderWidth:0, position:'absolute', bottom:10, right:10, alignSelf:'flex-end'}}>
+                <AddButton style={{  }} onPress={() => navigation.push('PickAnimal')}>
+                    <AntDesign name="plus" size={24} color="white" />
+                </AddButton>
+            </View>
         </Container>    
 
     )
@@ -77,10 +95,10 @@ export default function Home({ navigation }) {
 
 const Box = styled.View`
     background-color: #FFFFFF;
-    width: 42%;
+    width: 45%;
     height: 170px;
     border-radius: 7px;
-    margin: 4%;
+    margin: 2%;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.24);
     justify-content: center;
     
@@ -88,17 +106,18 @@ const Box = styled.View`
 
 const Row = styled.View`
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 50%;
+    padding: 4%;
 `;
 
 const AddButton = styled.TouchableHighlight`
         align-items: center;
         justify-content: center;
         width: 70px;                                     
-        bottom: 70px;                                            
-        right: 20px;
+        
         height: 70px;
-        background-color: #FFFFFF;
+        background-color: #2B2D42;
         border-radius: 100px;
         box-shadow: 2px 2px 2px rgba(0,0,0,0.24);
 `;

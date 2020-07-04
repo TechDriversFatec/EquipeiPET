@@ -2,27 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { 
 StyleSheet,
 Text,
-TextInputasNativeTextInput,
 ScrollView,
 View,
-Image,
-TouchableHighlight, 
-Button,
-AsyncStorage,
+TouchableHighlight,
+AsyncStorage
 } from 'react-native';
-import Constants from "expo-constants";
-import * as Permissions from "expo-permissions";
-import * as ImagePicker from 'expo-image-picker';
- 
+import api from '../../services/api';
 import { TextInput } from 'react-native-paper';
 import { CheckBox } from 'react-native-elements'
 
-import api from '../../services/api';
-import { Left } from 'native-base';
- 
-export default function First({navigation}) {
+export default function EditPet({ navigation }) {
 
-    const { animal } = navigation.state.params
+    const { petId } = navigation.state.params
 
     const [ user, setUser ] = useState()
     const [ name, setName ] = useState()
@@ -32,10 +23,24 @@ export default function First({navigation}) {
     const [ born, setBorn ] = useState()
     const [ breed, setBreed ] = useState()
     const [ castrationDate, setCastrationDate ] = useState()
-    const [ file, setImage ] = useState()
-    const [ teste, setTeste ] = useState(false)
-    const [ checked, setChecked ] = useState(false)
+
+    useEffect(() => {
+        async function getPet () {
+          const response = await api.get(`/pet/show/${petId}`)
     
+          setName(response.data.name)
+          setType(response.data.type)
+          setColor(response.data.color)
+          setAge(response.data.age)
+          setBorn(response.data.born)
+          setBreed(response.data.breed)
+          setCastrationDate(response.data.castrationDate)
+      
+        }
+    
+        getPet()
+    
+      }, [])
 
     useEffect(() => {
         async function getUser() {
@@ -48,35 +53,6 @@ export default function First({navigation}) {
         }
         getUser()
     }, [])
-
-    async function imagePickerCall() {
-        if (Constants.platform.ios) {
-          const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    
-          if (status !== "granted") {
-            alert("Nós precisamos dessa permissão.");
-            return;
-          }
-        }
-        
-
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All
-        });
-
-        console.log(result)
-      
-        if (result.cancelled) {
-            return;
-        }
-      
-        if (!result.uri) {
-            return;
-        }
-      
-        setImage(result);
-    }
-    
 
     const optionsDog = [
         {
@@ -241,13 +217,12 @@ export default function First({navigation}) {
     ]
 
 
-
     async function handlePet () {
         const id = await AsyncStorage.getItem('@ipet:userId')
         try {
-            const response = await api.post('/pet/create',{
+            const response = await api.put(`/pet/update/${petId}`, {
                 name,
-                type: animal,
+                type,
                 color,
                 age, 
                 born,
@@ -256,100 +231,75 @@ export default function First({navigation}) {
                 owner: user,
                 ownerId: id     
             })
-            if(!file) navigation.push('Home')
-            else sendFile(response.data._id)
-        } catch (error) {
-        console.log(error)    
-        }
-    }
-
-    async function sendFile(id) {
-        //const filename = file.split('/').pop();
-        const path = file.uri.split('/');
-        const fileName = path[path.length - 1];
-        const type = file.type
-        const uri = file.uri
-
-        const data = new FormData();
-        data.append("file", file, fileName)
-
-        console.log(JSON.stringify(data), 'name: ', name)
-        try {
-            const response = await api.put(`/pet/upload/${id}`, data)
-
             navigation.push('Home')
+            
         } catch (error) {
-            console.log(error)
+            console.log(error)    
         }
-        
     }
 
-
-return(
+  return (
     <ScrollView style={styles.container}>
-
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button title="Abrir galeria" onPress={imagePickerCall} />
-            {
-                file && <Image source={{ uri: file.uri }} style={{ width: 130, height: 130, marginTop: 5 }} />
-            }
-        </View>
-
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Nome do Pet"
             mode="outlined"
+            value={name}
             onChangeText={(value) => setName(value)}
             />
 
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Tipo (Cão ou Gato)"
             mode="outlined"
-            value={animal}
+            value={type}
+            onChangeText={(value) => setType(value)}
             />
 
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Cor do Pet"
             mode="outlined"
+            value={color}
             onChangeText={(value) => setColor(value)}
             />
             
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Idade"
             mode="outlined"
+            value={age}
             onChangeText={(value) => setAge(value)}
             />
             
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Data de Nascimento"
             mode="outlined"
+            value={born}
             onChangeText={(value) => setBorn(value)}
             />
             
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Raça"
             mode="outlined" 
-            onChangeText={(value) => setBreed(value)}   
+            value={breed}
+            onChangeText={(value) => setBreed(value)}
             />
             
             <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
             label="Data de Castração"
             mode="outlined"
+            value={castrationDate}
             onChangeText={(value) => setCastrationDate(value)}
             />
-            
+
             <Text style={{fontSize:16, marginTop:10}}>Patologias:</Text>
                 
             <TouchableHighlight style={[styles.button2]}>
                 <Text style={{color:"#FFF"}}>?</Text>
             </TouchableHighlight>
-
-            </View>
-        
-        
+            
+            
             <View style={[styles.container2]}>
             {
-                animal == 'Cão' ?
+                type == 'Cão' ?
                 optionsDog.map(option => (
                     <CheckBox 
                     key={option.id}
@@ -359,12 +309,11 @@ return(
                     backgroundColor={"#8D99AE"}
                     color={"#8D99AE"}
                     iconColor={"#8D99AE"}
-                    checked={() => setChecked(true) }
                     />
                 ))
 
                 :
-                animal == 'Gato' ?
+                type == 'Gato' ?
                 optionsCat.map(option => (
                     <CheckBox
                     key={option.id}
@@ -379,16 +328,17 @@ return(
                 
             }
             </View>
-        
+            
+            
             <TouchableHighlight style={[ styles.btnCadastrarPet ]}
             onPress={() => handlePet()}>
-            <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
+            <Text style={{ color:"#FFFFFF" }}> Atualizar Dados iPet </Text>
             </TouchableHighlight>
+        </View>
     </ScrollView>
-
     );
-    }
-    
+}
+
     const styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -397,16 +347,16 @@ return(
         },
         
         btnCadastrarPet: {
-            width:"90%",
-            height:47,
-            backgroundColor:"#EF233C",
-            justifyContent:"center",
-            alignItems:"center",
-            borderWidth:1,
-            borderColor:"#2B2D42",
-            borderRadius:7,
-            marginTop:20,
-            marginBottom: 30
+        width:"90%",
+        height:47,
+        backgroundColor:"#EF233C",
+        justifyContent:"center",
+        alignItems:"center",
+        borderWidth:1,
+        borderColor:"#2B2D42",
+        borderRadius:7,
+        marginTop:20,
+        marginBottom: 30
         },
 
         container2: {
@@ -421,10 +371,7 @@ return(
             backgroundColor: "#2B2D42",
             width:20,
             borderRadius:50,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
+            textAlign:"center"
         }
     }
- 
-)
+);

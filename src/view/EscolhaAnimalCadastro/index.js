@@ -23,11 +23,15 @@ export default function Home({ navigation }) {
         <Container style={[{ marginTop: 0 }], styles.container}>
                 <Row>
                     
-                            <Box style={{ alignItems: "center" }} >
+                            <Box style={{ alignItems: "center" }} 
+                            onPress={() => navigation.push('Form', { animal: 'Gato' })}
+                            >
                                 <Image source={cat} style={ styles.logo } />
                             </Box>
 
-                            <Box style={{ alignItems : 'center' }} >
+                            <Box style={{ alignItems : 'center' }} 
+                            onPress={() => navigation.push('Form', { animal: 'Cão' })}
+                            >
                                 <Image source={dog} style={ styles.logo } />
                             </Box>
                     
@@ -39,7 +43,7 @@ export default function Home({ navigation }) {
 }
 
 
-const Box = styled.View`
+const Box = styled.TouchableHighlight`
     background-color: #FFFFFF;
     width: 100%;
     height: 170px;
