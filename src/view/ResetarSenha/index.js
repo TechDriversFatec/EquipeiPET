@@ -2,8 +2,29 @@ import React, { useState } from 'react';
 import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage} from 'react-native'
 import { TextInput, BottomNavigation } from 'react-native-paper';
 import logo from '../../../assets/logo.png'
+import api from '../../services/api';
+import { registerRootComponent } from 'expo';
 
 export default function Login({navigation}) {
+
+  const [ email, setEmail ] = useState()
+  const [ token, setToken ] = useState()
+  const [ password, setPassword ] = useState()
+
+  async function resetPassword() {
+    try {
+      const response = await api.post('/auth/reset_password', {
+        email,
+        token,
+        password
+      })
+
+    navigation.push('Login')
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
 
@@ -16,21 +37,25 @@ export default function Login({navigation}) {
     style ={ styles.input }
     label = 'E-mail'
     mode = 'outlined'
+    onChangeText={(value) => setEmail(value)} 
         />
     
     <TextInput
     style ={ styles.input }
     label = 'Token'
     mode = 'outlined'
+    onChangeText={(value) => setToken(value)}
         />
     
     <TextInput
     style ={ styles.input }
     label = 'Senha'
     mode = 'outlined'
+    onChangeText={(value) => setPassword(value)}
         />
 
-    <TouchableHighlight style={[ styles.btnRegistro, styles.btnGeneral ]} >
+    <TouchableHighlight style={[ styles.btnRegistro, styles.btnGeneral ]}
+    onChangeText={() => resetPassword()} >
         <Text style ={{ color: '#FFF' } }> Resetar </Text>
     </TouchableHighlight>
 

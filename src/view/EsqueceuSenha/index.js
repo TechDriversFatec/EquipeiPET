@@ -2,10 +2,31 @@ import React, { useState } from 'react';
 import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage} from 'react-native'
 import { TextInput, BottomNavigation } from 'react-native-paper';
 import logo from '../../../assets/logo.png'
+import api from '../../services/api';
 
 export default function Login({navigation}) {
+  
+  const [ email, setEmail ] = useState()
 
-  return (
+  async function sendMail() {
+    console.log(email)
+    try {
+      const response = await api.post('/auth/forgot_password', {
+        email,
+      })
+
+    await AsyncStorage.multiSet([
+      ['@ipet:email', email]
+    ])
+    
+    navigation.push('ResetarSenha')
+  
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+return (
 <View style={ styles.container } >
   <Image source={logo} style={ styles.logo }>
      </Image>
@@ -18,10 +39,12 @@ export default function Login({navigation}) {
   label = 'E-mail'
   mode = 'outlined'
   style ={ styles.input }
+  onChangeText={(value) => setEmail(value)}
   />
 
-  <TouchableHighlight style={[ styles.btnRegistro, styles.btnGeneral ]}>
-    <Text style={{ color: "#FFFFFF" }}> Enviar e-mail </Text>
+  <TouchableHighlight style={[ styles.btnRegistro, styles.btnGeneral ]}
+  onPress={() => sendMail()}>
+    <Text style={{ color: "#FFFFFF" }}> Enviar e-mail </Text> 
   </TouchableHighlight>
 
 </View>

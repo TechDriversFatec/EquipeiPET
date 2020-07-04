@@ -14,6 +14,9 @@ import Parasitario from '../view/Parasitario';
 import CadParasitario from '../view/CadastroParasitario';
 import Vermifugo from '../view/Vermifugos'
 import CadVermifugo from '../view/CadastroVermifugo';
+import EsqueceuSenha from '../view/EsqueceuSenha';
+import ResetarSenha from '../view/ResetarSenha';
+import TrocarSenha from '../view/TrocarSenha'
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -100,7 +103,28 @@ const Routes = createAppContainer(
             {
                 headerShown: true,
             }
-        }
+        },
+        EsqueceuSenha: {
+            screen: EsqueceuSenha,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
+        ResetarSenha: {
+            screen: ResetarSenha,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
+        TrocarSenha: {
+            screen: TrocarSenha,
+            navigationOptions: 
+            {
+                headerShown: true,
+            }
+        },
     })
 );
 

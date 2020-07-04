@@ -8,7 +8,7 @@ View,
 Image,
 TouchableHighlight, 
 Button,
-AsyncStorage
+AsyncStorage,
 } from 'react-native';
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
@@ -28,7 +28,6 @@ export default function First({navigation}) {
     const [ born, setBorn ] = useState()
     const [ breed, setBreed ] = useState()
     const [ castrationDate, setCastrationDate ] = useState()
-
     const [ file, setImage ] = useState()
 
     useEffect(() => {
@@ -170,12 +169,17 @@ return(
             mode="outlined"
             onChangeText={(value) => setCastrationDate(value)}
             />
+
+            <Text style={ styles.texto }>
+                Patologias:
+            </Text>
+            
+            </View> 
             
             <TouchableHighlight style={[ styles.btnCadastrarPet ]}
             onPress={() => handlePet()}>
             <Text style={{ color:"#FFFFFF" }}> Cadastrar meu Pet </Text>
             </TouchableHighlight>
-        </View>
     </ScrollView>
 
     );
@@ -183,9 +187,9 @@ return(
     
     const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#8D99AE',
-        paddingTop: 20
+    flex: 1,
+    backgroundColor: '#8D99AE',
+    paddingTop: 20
     },
     
     btnCadastrarPet: {
@@ -199,8 +203,32 @@ return(
     borderRadius:7,
     marginTop:10,
     marginBottom: 30
-    }
+    },
+
+    texto: {
+    textAlign: 'left', alignSelf: 'stretch',
+    color: "#FFFFFF",
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 20
+    },
+
+    label: {
+    margin: 5,
+    fontSize: 16,
+    color: '#FFFFFF'
+    },
+
+    checkbox: {
+    alignSelf: 'stretch',
+    color: '#FFFFFF'
+    },
+
+    checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+    },
     }
  
-);
-
+)
