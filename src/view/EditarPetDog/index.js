@@ -290,7 +290,7 @@ export default function EditPet({ navigation }) {
             onChangeText={(value) => setCastrationDate(value)}
             />
 
-            <Text style={{fontSize:'16px', marginTop:'10px'}}>Patologias:</Text>
+            <Text style={{fontSize:16, marginTop:10}}>Patologias:</Text>
                 
             <TouchableHighlight style={[styles.button2]}>
                 <Text style={{color:"#FFF"}}>?</Text>
@@ -363,14 +363,14 @@ export default function EditPet({ navigation }) {
             flex: 1,
             backgroundColor: '#FFF',
             width:"70%",
-            marginTop:"10px",
-            borderRadius:"5px"
+            marginTop:10,
+            borderRadius:5
         },
 
         button2: {
             backgroundColor: "#2B2D42",
-            width:"20px",
-            borderRadius:"50%",
+            width:20,
+            borderRadius:50,
             textAlign:"center"
         }
     }

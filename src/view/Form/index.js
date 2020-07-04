@@ -35,6 +35,7 @@ export default function First({navigation}) {
 
     const [ file, setImage ] = useState()
     const [ teste, setTeste ] = useState(false)
+    const [ checked, setChecked ] = useState(false)
     
 
     useEffect(() => {
@@ -267,14 +268,13 @@ export default function First({navigation}) {
         //const filename = file.split('/').pop();
         const path = file.uri.split('/');
         const fileName = path[path.length - 1];
+        const type = file.type
+        const uri = file.uri
 
         const data = new FormData();
-        data.append('file',  { 
-            uri: file.uri,
-            name: fileName,
-            type: file.type
-         } )
+        data.append("file", file, fileName)
 
+        console.log(JSON.stringify(data), 'name: ', name)
         try {
             const response = await api.put(`/pet/upload/${id}`, data)
 
@@ -340,7 +340,7 @@ return(
             />
 
             
-            <Text style={{fontSize:'16px', marginTop:'10px'}}>Patologias:</Text>
+            <Text style={{fontSize:16, marginTop:10}}>Patologias:</Text>
                 
             <TouchableHighlight style={[styles.button2]}>
                 <Text style={{color:"#FFF"}}>?</Text>
@@ -359,6 +359,7 @@ return(
                     backgroundColor={"#8D99AE"}
                     color={"#8D99AE"}
                     iconColor={"#8D99AE"}
+                    checked={() => setChecked(true) }
                     />
                 ))
 
@@ -390,39 +391,41 @@ return(
     }
     
     const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#8D99AE',
-        paddingTop: 20
-    },
-    
-    btnCadastrarPet: {
-        width:"90%",
-        height:47,
-        backgroundColor:"#EF233C",
-        justifyContent:"center",
-        alignItems:"center",
-        borderWidth:1,
-        borderColor:"#2B2D42",
-        borderRadius:7,
-        marginTop:20,
-        marginBottom: 30
-    },
+        container: {
+            flex: 1,
+            backgroundColor: '#8D99AE',
+            paddingTop: 20
+        },
+        
+        btnCadastrarPet: {
+            width:"90%",
+            height:47,
+            backgroundColor:"#EF233C",
+            justifyContent:"center",
+            alignItems:"center",
+            borderWidth:1,
+            borderColor:"#2B2D42",
+            borderRadius:7,
+            marginTop:20,
+            marginBottom: 30
+        },
 
-    container2: {
-        flex: 1,
-        backgroundColor: '#FFF',
-        width:"70%",
-        marginTop:"10px",
-        borderRadius:"5px"
-    },
+        container2: {
+            flex: 1,
+            backgroundColor: '#FFF',
+            width:"70%",
+            marginTop:10,
+            borderRadius:5
+        },
 
-    button2: {
-        backgroundColor: "#2B2D42",
-        width:"20px",
-        borderRadius:"50%",
-        textAlign:"center"
-    }
+        button2: {
+            backgroundColor: "#2B2D42",
+            width:20,
+            borderRadius:50,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }
     }
  
 );
