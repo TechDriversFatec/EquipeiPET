@@ -6,7 +6,8 @@ import {
   View,
   Image,
   TouchableHighlight,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 
 import api from '../../services/api'
@@ -18,8 +19,10 @@ export default function Registro({navigation}) {
     const [ name, setName ] = useState()
     const [ email, setEmail ] = useState()
     const [ password, setPassword ] = useState()
+    const [ loading, setLoading ] = useState(false)
 
     async function register() {
+        setLoading(true)
         try {
             const response = await api.post('/auth/register', {
                 name,
@@ -38,6 +41,7 @@ export default function Registro({navigation}) {
 
         }   catch (error) {
             console.log(error)
+            setLoading(false)
         }
       }
     
@@ -70,11 +74,15 @@ export default function Registro({navigation}) {
         onChangeText={(value) => setPassword(value)} 
 
         />
-
-        <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistro ]}
-        onPress={() => register()}>
-            <Text style={{ color: "#FFFFFF" }}> Registrar </Text>
-        </TouchableHighlight>
+        {
+            loading ? <ActivityIndicator size="small" color="#EF233C" style={{ marginTop:20 }} />
+            : 
+            <TouchableHighlight style={[ styles.btnGeneral, styles.btnRegistro ]}
+            onPress={() => register()}>
+                <Text style={{ color: "#FFFFFF" }}> Registrar </Text>
+            </TouchableHighlight>
+        }
+        
     
         <Text style={ styles.text } onPress={() => navigation.push('Login')}>
             Já possui uma conta? Clique aqui!

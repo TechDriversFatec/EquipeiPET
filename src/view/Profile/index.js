@@ -11,6 +11,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import logo from '../../../assets/logo.png'
 //import photo from '../../../assets/photo.png'
+import moment from 'moment'
 
 import styled from 'styled-components/native'
 import api from '../../services/api';
@@ -25,6 +26,8 @@ export default function Index({ navigation }) {
   const [ color, setColor ] = useState()
   const [ age, setAge ] = useState()
   const [ breed, setBreed ] = useState()
+  const [ castrationDate, setCastrationDate ] = useState()
+  const [ disease, setDisease ] = useState()
 
 
   useEffect(() => {
@@ -36,23 +39,36 @@ export default function Index({ navigation }) {
       setColor(response.data.color)
       setAge(response.data.age)
       setBreed(response.data.breed)
-  
+      setCastrationDate(response.data.castrationDate)
+      setDisease(response.data.disease)
+
+      console.log(castrationDate, response.data.castrationDate)
+
     }
 
     getPet()
 
   }, [])
+  
 
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
         <View style={styles.container3}>
           <Image source={logo} style={ styles.logo } />
-          <Text>Nome: {name}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 19, marginBottom: 20 }}> {name}</Text>
           <Text>Tipo: {type}</Text>
           <Text>Cor: {color}</Text>
           <Text>Idade: {age}</Text>
           <Text>Raça: {breed}</Text>
+          {
+            !castrationDate == '-' ?
+            <Text>Castração: { moment(castrationDate).format('MM/DD/YYYY') } </Text> 
+            : <Text>Castração: { castrationDate } </Text> 
+          }
+          
+          <Text>Raça: {disease}</Text>
+          
    
         </View>
       </View>

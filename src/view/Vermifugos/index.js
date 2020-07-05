@@ -53,8 +53,8 @@ export default function Vermifuge({ navigation }){
                 <View style={{ width: "90%" }}>
                   <Text style={ styles.vermifugeName }>{ vermifuge.name } </Text>
                   <Text style={ styles.vermifugeDates }>
-                    { moment(vermifuge.vermifugeDate).add(10, 'days').calendar() } - 
-                    { moment(vermifuge.returningDate).add(10, 'days').calendar() }
+                    { moment(vermifuge.vermifugeDate).format('DD/MM/YYYY ') }- 
+                    { moment(vermifuge.returningDate).format(' DD/MM/YYYY') }
                   </Text>
                 </View>
                 <Fontisto name="trash" size={20} color="grey" 

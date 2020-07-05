@@ -24,13 +24,23 @@ export default function App({ navigation }) {
 
   async function handleVaccine() {
 
+    const vaccD = vaccinationDate.split('/')[0]
+    const vaccM = vaccinationDate.split('/')[1]
+    const vaccY = vaccinationDate.split('/')[2]
+    const completeDate = vaccM + '/' + vaccD + '/' + vaccY
+
+    const retD = returningDate.split('/')[0]
+    const retM = returningDate.split('/')[1]
+    const retY = returningDate.split('/')[2]
+    const completeReturning = retM + '/' + retD + '/' + retY
+
     try {
       const response = await api.post('/vaccinate/create', {
         name,
         petId,
         petName,
-        vaccinationDate,
-        returningDate
+        vaccinationDate: completeDate,
+        returningDate: completeReturning
       })
 
       console.log(response.data)

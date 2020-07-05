@@ -60,8 +60,8 @@ export default function Vaccines({ navigation }) {
                                 <View style={{ width: "90%" }}>
                                     <Text style={ styles.vaccineName }>{ vaccine.name } </Text>
                                     <Text style={ styles.vaccineDates }>
-                                        { moment(vaccine.vaccinationDate).add(10, 'days').calendar() } - 
-                                        { moment(vaccine.returningDate).add(10, 'days').calendar() }
+                                        { moment(vaccine.vaccinationDate).format('DD/MM/YYYY ') }- 
+                                        { moment(vaccine.returningDate).format(' DD/MM/YYYY') }
                                     </Text>
                                 </View>
                                 

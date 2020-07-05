@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage} from 'react-native'
+import {StyleSheet, TouchableHighlight, View, Image, Text, AsyncStorage, ActivityIndicator} from 'react-native'
 import { TextInput } from 'react-native-paper';
 import logo from '../../../assets/logo.png'
 import api from '../../services/api';
@@ -8,8 +8,10 @@ export default function Login({navigation}) {
 
   const [ email, setEmail ] = useState();
   const [ password, setPassword ] = useState();
+  const [ loading, setLoading ] = useState(false)
 
   async function auth() {
+    setLoading(true)
     try {
       const response = await api.post('auth/login', {
         email,
@@ -27,6 +29,7 @@ export default function Login({navigation}) {
 
     } catch (error) {
       console.log(error)
+      setLoading(false)
     }
   }
     return (
@@ -49,21 +52,27 @@ export default function Login({navigation}) {
             >
             </TextInput>
 
-            <TouchableHighlight style={[ styles.btnGeneral, styles.btnEntrar ]}
-            onPress={() => auth()}>
-                <Text style={{ color: "#FFFFFF", fontSize: 18 }}> Entrar </Text>
-            </TouchableHighlight>
+            {
+              loading ? <ActivityIndicator size="small" color="#EF233C" style={{ marginTop:20 }} />
+              : 
+              <TouchableHighlight style={[ styles.btnGeneral, styles.btnEntrar ]}
+              onPress={() => auth()}>
+                  <Text style={{ color: "#FFFFFF", fontSize: 18 }}> Entrar </Text>
+              </TouchableHighlight>
+            }
+
+            
 
             <Text style={ styles.textlink }
             onPress={() => navigation.push('Registro')} >
              Registrar
             </Text>
-
+            {/** Deixando desabilitado por enquanto (Gmail tá bloqueando nossos emails)
             <Text style={ styles.textlink }
             onPress={() => navigation.push('Forgot')}>
              Esqueceu sua senha?
             </Text>
-
+            */}
         </View>
     );
 }

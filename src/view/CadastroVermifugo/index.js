@@ -25,13 +25,23 @@ export default function App({ navigation }) {
 
   async function handleVermifuge() {
 
+    const vaccD = vermifugationDate.split('/')[0]
+    const vaccM = vermifugationDate.split('/')[1]
+    const vaccY = vermifugationDate.split('/')[2]
+    const completeDate = vaccM + '/' + vaccD + '/' + vaccY
+
+    const retD = returningDate.split('/')[0]
+    const retM = returningDate.split('/')[1]
+    const retY = returningDate.split('/')[2]
+    const completeReturning = retM + '/' + retD + '/' + retY
+
     try {
       const response = await api.post('/vermifuge/create', {
         name,
         petId,
         petName,
-        vermifugationDate,
-        returningDate
+        vermifugationDate: completeDate,
+        returningDate: completeReturning
       })
 
       console.log(response.data)

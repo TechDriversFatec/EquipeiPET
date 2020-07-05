@@ -53,8 +53,8 @@ export default function Parasiting({ navigation }){
                 <View style={{ width: "90%" }}>
                   <Text style={ styles.parasitingName }>{ parasiting.name } </Text>
                   <Text style={ styles.parasitingDates }>
-                    { moment(parasiting.parasitingDate).add(10, 'days').calendar() } - 
-                    { moment(parasiting.returningDate).add(10, 'days').calendar() }
+                    { moment(parasiting.parasitingDate).format('DD/MM/YYYY ') }- 
+                    { moment(parasiting.returningDate).format(' DD/MM/YYYY') }
                   </Text>
                 </View>
                 <Fontisto name="trash" size={20} color="grey" 

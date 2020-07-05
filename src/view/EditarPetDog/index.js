@@ -5,7 +5,8 @@ Text,
 ScrollView,
 View,
 TouchableHighlight,
-AsyncStorage
+AsyncStorage,
+ActivityIndicator
 } from 'react-native';
 import api from '../../services/api';
 import { TextInput } from 'react-native-paper';
@@ -23,6 +24,8 @@ export default function EditPet({ navigation }) {
     const [ born, setBorn ] = useState()
     const [ breed, setBreed ] = useState()
     const [ castrationDate, setCastrationDate ] = useState()
+    const [ disease, setDisease ] = useState()
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(() => {
         async function getPet () {
@@ -35,7 +38,7 @@ export default function EditPet({ navigation }) {
           setBorn(response.data.born)
           setBreed(response.data.breed)
           setCastrationDate(response.data.castrationDate)
-      
+          setDisease(response.data.disease)  
         }
     
         getPet()
@@ -218,6 +221,7 @@ export default function EditPet({ navigation }) {
 
 
     async function handlePet () {
+        setLoading(true)
         const id = await AsyncStorage.getItem('@ipet:userId')
         try {
             const response = await api.put(`/pet/update/${petId}`, {
@@ -227,6 +231,7 @@ export default function EditPet({ navigation }) {
                 age, 
                 born,
                 breed,
+                disease,
                 castrationDate,
                 owner: user,
                 ownerId: id     
@@ -234,6 +239,7 @@ export default function EditPet({ navigation }) {
             navigation.push('Home')
             
         } catch (error) {
+            setLoading(false)
             console.log(error)    
         }
     }
@@ -290,50 +296,21 @@ export default function EditPet({ navigation }) {
             onChangeText={(value) => setCastrationDate(value)}
             />
 
-            <Text style={{fontSize:16, marginTop:10}}>Patologias:</Text>
-                
-            <TouchableHighlight style={[styles.button2]}>
-                <Text style={{color:"#FFF"}}>?</Text>
-            </TouchableHighlight>
-            
-            
-            <View style={[styles.container2]}>
+            <TextInput style={{ backgroundColor:'#8D99AE', borderColor: '#FFFFFF', width: '90%' }}
+            label="Patologias"
+            mode="outlined"
+            value={disease}
+            onChangeText={(value) => setDisease(value)}
+            />
             {
-                type == 'Cão' ?
-                optionsDog.map(option => (
-                    <CheckBox 
-                    key={option.id}
-                    title={option.doenca}
-                    checkedColor={"#8D99AE"}
-                    uncheckedColor={"#8D99AE"}
-                    backgroundColor={"#8D99AE"}
-                    color={"#8D99AE"}
-                    iconColor={"#8D99AE"}
-                    />
-                ))
-
-                :
-                type == 'Gato' ?
-                optionsCat.map(option => (
-                    <CheckBox
-                    key={option.id}
-                    title={option.doenca}
-                    checkedColor={"#8D99AE"}
-                    uncheckedColor={"#8D99AE"}
-                    backgroundColor={"#8D99AE"}
-                    />
-                ))
-
-                : null
-                
+              loading ? <ActivityIndicator size="small" color="#EF233C" style={{ marginTop:20 }} />
+              : 
+                <TouchableHighlight style={[ styles.btnCadastrarPet ]}
+                onPress={() => handlePet()}>
+                    <Text style={{ color:"#FFFFFF" }}> Atualizar Dados iPet </Text>
+                </TouchableHighlight>
             }
-            </View>
             
-            
-            <TouchableHighlight style={[ styles.btnCadastrarPet ]}
-            onPress={() => handlePet()}>
-            <Text style={{ color:"#FFFFFF" }}> Atualizar Dados iPet </Text>
-            </TouchableHighlight>
         </View>
     </ScrollView>
     );
@@ -370,8 +347,7 @@ export default function EditPet({ navigation }) {
         button2: {
             backgroundColor: "#2B2D42",
             width:20,
-            borderRadius:50,
-            textAlign:"center"
+            borderRadius:50
         }
     }
 );

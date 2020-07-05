@@ -20,6 +20,7 @@ import Reset from '../view/ResetarSenha';
 import Change from '../view/TrocarSenha';
 import UpdateDog from '../view/EditarPetDog';
 import UpdateCat from '../view/EditarPetCat';
+import Disease from '../view/Form/disease';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -104,6 +105,13 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
+        CadVermifugo: {
+            screen: CadVermifugo,
+            navigationOptions:
+            {
+                headerShown: true,
+            }
+        },
         PickAnimal: {
             screen: PickAnimal,
             navigationOptions:
@@ -151,6 +159,14 @@ const Routes = createAppContainer(
                 headerShown: true,
             }
         },
+        Disease: {
+            screen: Disease,
+            navigationOptions:
+            {
+                headerTitle: 'Exemplo de Patologias',
+                headerShown: true,
+            }
+        }
 
     })
 );
