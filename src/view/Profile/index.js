@@ -67,7 +67,7 @@ export default function Index({ navigation }) {
             : <Text>Castração: { castrationDate } </Text> 
           }
           
-          <Text>Raça: {disease}</Text>
+          <Text>Patologias : {disease}</Text>
           
    
         </View>
