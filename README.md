@@ -6,22 +6,23 @@
 <h3 align="center">iPet</h3>
 
 
-## 📝 Table of Contents
+## 📝 Sumário
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Built Using](#built_using)
-- [Authors](#authors)
+- [Sobre](#about)
+- [Dando início](#getting_started)
+- [Construído com](#built_using)
+- [Autores](#authors)
+- [Referências](#references)
 
-## 🧐 About <a name = "about"></a>
+## 🧐 Sobre <a name = "about"></a>
 
 Projeto da discplina de Programação em Microinformática com foco em gerenciamento e cuidados com Pets.
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 🏁 Dando início <a name = "getting_started"></a>
 
-Para testar a aplicação localmente, siga os passos em "Installing"
+Para testar a aplicação localmente, siga os passos em "Instalação"
 
-### Prerequisites
+### Pré-requisitos
 
 Expo CLI
 
@@ -29,7 +30,7 @@ Expo CLI
 npm install expo-cli --global
 ```
 
-### Installing
+### Instalação
 
 
 ```
@@ -48,7 +49,7 @@ cd ipet-app
 expo start
 ```
 
-## ⛏️ Built Using <a name = "built_using"></a>
+## ⛏️ Construído com: <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Express](https://expressjs.com/) - Server Framework
@@ -56,12 +57,15 @@ expo start
 - [Expo](https://expo.io) - Mobile Plataform
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
-## ✍️ Authors <a name = "authors"></a>
+## ✍️ Autores <a name = "authors"></a>
 
-- [@Thais](https://github.com/thaisrabelo) - Front-end Development
-- [@Eduardo](https://github.com/eduardogiudice) - Front-end Development
-- [@Camila](https://github.com/camilaffpacheco) - Front-end Development
-- [@João](https://github.com/Asfhen) - Front-end Development
-- [@Renan](https://github.com/medrenan) - Front-end Development
-- [@Matheus](https://github.com/MatheusCoxxxta) - Full Stack Development
+- [@Thais Rabelo - Linkedin](https://www.linkedin.com/in/thaís-rabelo-823b401a3/) - Scrum Master/Front-end Development
+- [@Eduardo Giudice - Linkedin](https://www.linkedin.com/in/eduardogiudice/) - Front-end Development
+- [@Camila Pacheco - Linkedin](https://www.linkedin.com/in/camila-pacheco-aba39b1b2/) - Back-end Development
+- [@João Pedro - Linkedin](https://github.com/Asfhen) - Front-end Development
+- [@Renan Medeiros - Linkedin](https://www.linkedin.com/in/renan-alves-de-medeiros-ba956719a/) - Back-end Development
+- [@Matheus Costa - Linkedin](https://www.linkedin.com/in/matheus-costa-500695187/) - Full Stack Development
 
+## Referências <a name = "references"></a>
+
+- [iPet-api](https://www.linkedin.com/in/matheus-costa-500695187/) - Repositório do back-end.
