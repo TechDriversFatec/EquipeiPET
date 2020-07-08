@@ -62,7 +62,7 @@ expo start
 - [@Thais Rabelo - Linkedin](https://www.linkedin.com/in/thaís-rabelo-823b401a3/) - Scrum Master/Front-end Development
 - [@Eduardo Giudice - Linkedin](https://www.linkedin.com/in/eduardogiudice/) - Front-end Development
 - [@Camila Pacheco - Linkedin](https://www.linkedin.com/in/camila-pacheco-aba39b1b2/) - Back-end Development
-- [@João Pedro - Linkedin](https://github.com/Asfhen) - Front-end Development
+- [@João Pedro - Linkedin](https://www.linkedin.com/in/jo%C3%A3o-pedro-lucchesi-roberto-545b70194/) - Front-end Development
 - [@Renan Medeiros - Linkedin](https://www.linkedin.com/in/renan-alves-de-medeiros-ba956719a/) - Back-end Development
 - [@Matheus Costa - Linkedin](https://www.linkedin.com/in/matheus-costa-500695187/) - Full Stack Development
 
