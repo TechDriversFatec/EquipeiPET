@@ -69,3 +69,4 @@ expo start
 ## Referências <a name = "references"></a>
 
 - [iPet-api](https://www.linkedin.com/in/matheus-costa-500695187/) - Repositório do back-end.
+# EquipeiPet
